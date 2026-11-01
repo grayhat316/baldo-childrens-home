@@ -718,3 +718,32 @@ main p, main li { max-width: 74ch; }
 /* fullscreen: black surround, video at its own shape, controls still there */
 .player:fullscreen, .player:-webkit-full-screen { width: 100%; height: 100%; display: flex; align-items: center; }
 .player:fullscreen video, .player:-webkit-full-screen video { width: 100%; height: 100%; aspect-ratio: auto; }
+
+
+/* player states */
+.pl-spin {
+  position: absolute; left: 50%; top: 50%; width: 42px; height: 42px;
+  margin: -21px 0 0 -21px; z-index: 4; pointer-events: none; display: none;
+  border: 3px solid rgba(255,255,255,.28); border-top-color: #fff; border-radius: 50%;
+  animation: plspin .9s linear infinite;
+}
+.player.buffering .pl-spin { display: block; }
+@keyframes plspin { to { transform: rotate(360deg); } }
+
+.pl-error {
+  position: absolute; left: 12px; right: 12px; bottom: 58px; z-index: 5; margin: 0;
+  padding: 10px 12px; background: rgba(0,0,0,.82); color: #fff; font-size: .9rem;
+}
+.pl-error[hidden] { display: none; }
+.pl-error a { color: #fff; text-decoration: underline; }
+
+/* fullscreen: black surround, whole frame by default, fill only on request */
+.player:fullscreen, .player:-webkit-full-screen {
+  width: 100%; height: 100%; background: #000;
+  display: flex; align-items: center; justify-content: center;
+}
+.player:fullscreen video, .player:-webkit-full-screen video {
+  width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain;
+}
+.player:fullscreen.filling video, .player:-webkit-full-screen.filling video { object-fit: cover; }
+.player::backdrop { background: #000; }

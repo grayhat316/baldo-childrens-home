@@ -140,9 +140,13 @@ if (donateForm) {
   var ICON_MUTE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm12.7.1 1.4 1.4-2 2 2 2-1.4 1.4-2-2-2 2-1.4-1.4 2-2-2-2 1.4-1.4 2 2 2-2z"/></svg>';
 
   function clock(t) {
-    if (!isFinite(t)) return "0:00";
-    var m = Math.floor(t / 60), sec = Math.floor(t % 60);
-    return m + ":" + (sec < 10 ? "0" + sec : sec);
+    if (!isFinite(t) || t < 0) return "0:00";
+    var m = Math.floor(t / 60), s = Math.floor(t % 60);
+    return m + ":" + (s < 10 ? "0" + s : s);
+  }
+
+  function isFs() {
+    return document.fullscreenElement || document.webkitFullscreenElement || null;
   }
 
   document.querySelectorAll(".player").forEach(function (player) {
@@ -155,33 +159,68 @@ if (donateForm) {
     var mute = player.querySelector(".pl-mute");
     var fill = player.querySelector(".pl-fill");
     var fs = player.querySelector(".pl-fs");
+    var note = player.querySelector(".pl-error");
+    var stuck = false, stuckTimer = null;
 
     function paint() {
-      var playing = !v.paused && !v.ended;
+      var playing = !v.paused && !v.ended && v.readyState > 2;
       player.classList.toggle("playing", playing);
       player.classList.toggle("paused", !playing);
-      if (play) { play.innerHTML = playing ? ICON_PAUSE : ICON_PLAY; play.setAttribute("aria-label", playing ? "Pause" : "Play"); }
+      if (play) {
+        play.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
+        play.setAttribute("aria-label", playing ? "Pause" : "Play");
+      }
       if (mute) {
-        mute.innerHTML = v.muted || v.volume === 0 ? ICON_MUTE : ICON_VOL;
+        mute.innerHTML = (v.muted || v.volume === 0) ? ICON_MUTE : ICON_VOL;
         mute.setAttribute("aria-label", v.muted ? "Unmute" : "Mute");
       }
       if (time) time.textContent = clock(v.currentTime) + " / " + clock(v.duration);
       if (seek && v.duration) seek.value = Math.round((v.currentTime / v.duration) * 1000);
+      if (note) note.hidden = !(v.error || stuck);
     }
 
-    function toggle() { if (v.paused || v.ended) v.play(); else v.pause(); }
+    function start() {
+      var p = v.play();
+      if (p && p.catch) {
+        p.catch(function () {
+          // some phones refuse to start with sound; try silent, then let them unmute
+          v.muted = true;
+          paint();
+          var q = v.play();
+          if (q && q.catch) q.catch(function () { player.classList.remove("buffering"); });
+        });
+      }
+    }
 
-    if (big) big.addEventListener("click", toggle);
-    if (play) play.addEventListener("click", toggle);
-    [v, big, play].forEach(function (el) { if (el) el.addEventListener("click", function () {}); });
+    function toggle() {
+      if (v.paused || v.ended) start(); else v.pause();
+    }
 
-    v.addEventListener("click", toggle);
-    v.addEventListener("play", paint);
-    v.addEventListener("pause", paint);
-    v.addEventListener("ended", paint);
-    v.addEventListener("timeupdate", paint);
-    v.addEventListener("loadedmetadata", paint);
-    v.addEventListener("volumechange", paint);
+    [big, play, v].forEach(function (el) { if (el) el.addEventListener("click", toggle); });
+
+    ["play", "pause", "ended", "timeupdate", "loadedmetadata", "volumechange", "canplay", "error"]
+      .forEach(function (ev) { v.addEventListener(ev, paint); });
+
+    function beginBuffer() {
+      player.classList.add("buffering");
+      clearTimeout(stuckTimer);
+      stuckTimer = setTimeout(function () {
+        if (player.classList.contains("buffering")) { stuck = true; paint(); }
+      }, 15000);
+    }
+    function endBuffer() {
+      player.classList.remove("buffering");
+      clearTimeout(stuckTimer);
+      stuck = false;
+      paint();
+    }
+
+    v.addEventListener("waiting", beginBuffer);
+    v.addEventListener("stalled", beginBuffer);
+    v.addEventListener("seeking", beginBuffer);
+    ["playing", "canplay", "seeked", "pause", "ended"].forEach(function (ev) {
+      v.addEventListener(ev, endBuffer);
+    });
 
     if (seek) seek.addEventListener("input", function () {
       if (v.duration) v.currentTime = (seek.value / 1000) * v.duration;
@@ -189,23 +228,42 @@ if (donateForm) {
 
     if (mute) mute.addEventListener("click", function () { v.muted = !v.muted; });
 
+    // fill: outside fullscreen it takes you full screen and crops to fill it;
+    // inside fullscreen it switches between the whole frame and a filled screen
     if (fill) fill.addEventListener("click", function () {
-      var on = player.classList.toggle("filling");
-      fill.classList.toggle("on", on);
-      fill.setAttribute("aria-pressed", on ? "true" : "false");
+      if (!isFs()) {
+        player.classList.add("filling");
+        fill.classList.add("on");
+        enterFullscreen();
+      } else {
+        var on = player.classList.toggle("filling");
+        fill.classList.toggle("on", on);
+      }
+      fill.setAttribute("aria-pressed", "false");
     });
 
-    if (fs) fs.addEventListener("click", function () {
-      var isFs = document.fullscreenElement || document.webkitFullscreenElement;
-      if (isFs) {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-      } else if (player.requestFullscreen) {
-        player.requestFullscreen();
+    function enterFullscreen() {
+      if (player.requestFullscreen) {
+        player.requestFullscreen().catch(function () {
+          if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+        });
       } else if (player.webkitRequestFullscreen) {
         player.webkitRequestFullscreen();
       } else if (v.webkitEnterFullscreen) {
-        v.webkitEnterFullscreen();   // iPhone: the video handles it
+        v.webkitEnterFullscreen();          // iPhone: the video goes full screen itself
+      }
+    }
+
+    if (fs) fs.addEventListener("click", function () {
+      if (isFs()) {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        player.classList.remove("filling");
+        if (fill) fill.classList.remove("on");
+      } else {
+        player.classList.remove("filling");
+        if (fill) fill.classList.remove("on");
+        enterFullscreen();
       }
     });
 
@@ -215,5 +273,7 @@ if (donateForm) {
       if (e.key === "m") { e.preventDefault(); v.muted = !v.muted; }
       if (e.key === "f") { e.preventDefault(); if (fs) fs.click(); }
     });
+
+    paint();
   });
 })();

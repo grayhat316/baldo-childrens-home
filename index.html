@@ -151,7 +151,9 @@
     <figure class="video">
         <div class="player paused">
           <video src="assets/video/film-web.mp4" poster="assets/img/video-poster.jpg" playsinline preload="metadata" aria-label="Film about the home, recorded in 2015"></video>
+          <div class="pl-spin" aria-hidden="true"></div>
           <button class="pl-big" type="button" aria-label="Play the film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+          <p class="pl-error" hidden>The film could not play here. <a href="https://www.youtube.com/watch?v=dGLNG-MSjO8" target="_blank" rel="noopener">Watch it on YouTube</a>.</p>
           <div class="pl-bar">
             <button class="pl-play" type="button" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
             <input class="pl-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek through the film">
