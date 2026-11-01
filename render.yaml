@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: baldo-childrens-home
+    runtime: static
+    staticPublishPath: ./
+    buildCommand: ""
+    routes:
+      - type: rewrite
+        source: /donate
+        destination: /donate.html
