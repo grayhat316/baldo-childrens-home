@@ -228,43 +228,45 @@ if (donateForm) {
 
     if (mute) mute.addEventListener("click", function () { v.muted = !v.muted; });
 
-    // fill: outside fullscreen it takes you full screen and crops to fill it;
-    // inside fullscreen it switches between the whole frame and a filled screen
-    if (fill) fill.addEventListener("click", function () {
-      if (!isFs()) {
-        player.classList.add("filling");
-        fill.classList.add("on");
-        enterFullscreen();
-      } else {
-        var on = player.classList.toggle("filling");
-        fill.classList.toggle("on", on);
-      }
-      fill.setAttribute("aria-pressed", "false");
-    });
-
-    function enterFullscreen() {
+    function openBig() {
+      player.classList.add("theatre");
+      document.documentElement.classList.add("theatre-open");
+      // ask the browser for real fullscreen too, but never depend on it
       if (player.requestFullscreen) {
-        player.requestFullscreen().catch(function () {
-          if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
-        });
-      } else if (player.webkitRequestFullscreen) {
-        player.webkitRequestFullscreen();
-      } else if (v.webkitEnterFullscreen) {
-        v.webkitEnterFullscreen();          // iPhone: the video goes full screen itself
+        var r = player.requestFullscreen();
+        if (r && r.catch) r.catch(function () {});
       }
     }
 
-    if (fs) fs.addEventListener("click", function () {
-      if (isFs()) {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-        player.classList.remove("filling");
-        if (fill) fill.classList.remove("on");
+    function closeBig() {
+      player.classList.remove("theatre");
+      player.classList.remove("filling");
+      document.documentElement.classList.remove("theatre-open");
+      if (fill) fill.classList.remove("on");
+      if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    }
+
+    function bigOpen() {
+      return player.classList.contains("theatre") || !!isFs();
+    }
+
+    if (fill) fill.addEventListener("click", function () {
+      if (!bigOpen()) {
+        player.classList.add("filling");
+        if (fill) fill.classList.add("on");
+        openBig();
       } else {
-        player.classList.remove("filling");
-        if (fill) fill.classList.remove("on");
-        enterFullscreen();
+        var on = player.classList.toggle("filling");
+        if (fill) fill.classList.toggle("on", on);
       }
+    });
+
+    if (fs) fs.addEventListener("click", function () {
+      if (bigOpen()) closeBig(); else openBig();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && bigOpen()) closeBig();
     });
 
     player.addEventListener("keydown", function (e) {
@@ -272,6 +274,7 @@ if (donateForm) {
       if (e.key === " " || e.key === "k") { e.preventDefault(); toggle(); }
       if (e.key === "m") { e.preventDefault(); v.muted = !v.muted; }
       if (e.key === "f") { e.preventDefault(); if (fs) fs.click(); }
+      if (e.key === "Escape") { if (bigOpen()) closeBig(); }
     });
 
     paint();
