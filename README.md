@@ -1,6 +1,6 @@
-# Fr. Baldo Children's Home, demo site
+# Fr. Baldo Children's Home, website
 
-Static demonstration site for Fr. Baldo Children's Home, Ndaragwa, Nyandarua County, Kenya.
+Website for Fr. Baldo Children's Home, Ndaragwa, Nyandarua County, Kenya.
 Plain HTML, CSS and one small JS file. No build step, no framework, no server code, no database.
 
 ## Run it locally
@@ -31,7 +31,8 @@ var paystackKey = "";
 
 Put the home's **Paystack public key** in there. With a key present the donate form opens
 Paystack's checkout, restricted to `card` or `mobile_money` depending on what the donor picked.
-With it empty, the form stays in test mode and goes straight to `thank-you.html`.
+With it empty the form validates, then goes to `thank-you.html` without contacting Paystack.
+Do not launch without a key: an empty key means no payment is taken.
 
 Before that can happen:
 

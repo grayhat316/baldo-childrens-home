@@ -4,126 +4,140 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#123f31">
 <title>Donate | Fr. Baldo Children's Home</title>
-<meta name="description" content="Give to the home by card from anywhere, or by M-Pesa in Kenya. Preset amounts or your own.">
+<meta name="description" content="Give to the home by card from anywhere, or by M-Pesa in Kenya. Any amount, receipt by email.">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="demo-bar">Demonstration site prepared for the home. Payments run in test mode, no money is collected. <a href="donate.html">See the donate page</a></div>
-
 <header class="site-head">
-  <div class="wrap">
+  <div class="wrap bar">
     <a class="brand" href="index.html">
       <b>Fr. Baldo Children's Home</b>
       <span>Ndaragwa, Nyandarua County, Kenya</span>
     </a>
-    <nav class="site-nav">
-      <a href="our-story.html">Our story</a>
-      <a href="life-at-the-home.html">The home</a>
-      <a href="education.html">Education</a>
-      <a href="get-involved.html">Get involved</a>
-      <a href="contact.html">Contact</a>
-      <a class="btn btn-solid btn-donate" href="donate.html">Donate</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><i></i>Menu</button>
+    <nav class="nav" id="nav">
+        <a href="our-story.html">Our story</a>
+        <a href="life-at-the-home.html">Life at the home</a>
+        <a href="education.html">Education</a>
+        <a href="partners.html">Partners</a>
+        <a href="get-involved.html">Get involved</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn btn-solid head-cta" href="donate.html" aria-current="page">Donate</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
-
-<section class="band" style="border-top:0;padding-top:44px">
-  <div class="wrap narrow">
+<section class="band" style="border-top:0;padding-top:64px">
+  <div class="wrap">
     <h1>Donate</h1>
-    <p class="lede">Card from anywhere in the world, or M-Pesa if you are in Kenya. Pick one of the amounts below or put in your own.</p>
+    <p class="lede" style="max-width:60ch">Card from anywhere in the world, or M-Pesa if you are in Kenya. Every shilling goes to the home's account and is spent on food, school fees, uniforms and medicine.</p>
   </div>
 </section>
 
-<section class="donate" style="padding-top:44px">
+<section class="give">
   <div class="wrap">
     <div>
       <h2>Give once</h2>
-      <p>Card payments are handled by Paystack, which takes Visa, Mastercard and Verve, and by Apple Pay on a phone. M-Pesa goes through the same provider as a mobile money charge, so you will get the prompt on your handset and confirm it with your PIN.</p>
-      <p class="small">The home is a registered community based organisation under Ndaragwa Catholic Parish. Test mode is on for this demonstration, so no money moves.</p>
+      <p>Card payments take Visa, Mastercard and Verve, and Apple Pay on a phone. M-Pesa goes through as a mobile money charge, so you will get the prompt on your handset and confirm it with your PIN.</p>
+      <p class="small">The home is a registered community based organisation under Ndaragwa Catholic Parish, Ndaragwa, Nyandarua County.</p>
+      <p class="small"><a href="donations-policy.html">Donation policy</a> &nbsp; <a href="privacy.html">Privacy notice</a></p>
     </div>
     <div>
 
-    <form id="donate-form">
-      <div class="amounts">
-        <button type="button" data-usd="2" data-kes="250">$2</button>
-        <button type="button" data-usd="5" data-kes="500">$5</button>
-        <button type="button" data-usd="10" data-kes="1000">$10</button>
-        <button type="button" data-usd="20" data-kes="2000">$20</button>
-        <button type="button" data-usd="50" data-kes="5000">$50</button>
-      </div>
-      <div class="amount-field">
-        <label for="amount">Amount</label>
-        <input id="amount" name="amount" type="number" min="1" step="1" placeholder="Other amount" inputmode="numeric">
-        <select id="currency" name="currency" aria-label="Currency">
-          <option value="USD">USD</option>
-          <option value="KES">KES</option>
-        </select>
-      </div>
-      <div class="channels">
-        <label><input type="radio" name="method" value="card" checked> Card</label>
-        <label><input type="radio" name="method" value="mpesa"> M-Pesa</label>
-      </div>
-      <div class="amount-field">
-        <label for="email">Email for your receipt</label>
-        <input id="email" name="email" type="email" placeholder="you@example.com">
-      </div>
-      <button class="btn btn-solid" type="submit">Continue to secure checkout</button>
-    </form>
+      <form id="donate-form">
+        <div class="amounts">
+          <button type="button" data-usd="2" data-kes="250">$2</button>
+          <button type="button" data-usd="5" data-kes="500">$5</button>
+          <button type="button" data-usd="10" data-kes="1000">$10</button>
+          <button type="button" data-usd="20" data-kes="2000">$20</button>
+          <button type="button" data-usd="50" data-kes="5000">$50</button>
+        </div>
+        <div class="field">
+          <label for="amount">Amount and currency</label>
+          <div class="row-in">
+            <input id="amount" name="amount" type="number" min="1" step="1" placeholder="Your amount" inputmode="numeric">
+            <select id="currency" name="currency" aria-label="Currency">
+              <option value="USD">USD</option>
+              <option value="KES">KES</option>
+            </select>
+          </div>
+        </div>
+        <div class="channels">
+          <label><input type="radio" name="method" value="card" checked> Card</label>
+          <label><input type="radio" name="method" value="mpesa"> M-Pesa</label>
+        </div>
+        <div class="field">
+          <label for="email">Email for your receipt</label>
+          <div class="row-in"><input id="email" name="email" type="email" placeholder="you@example.com"></div>
+        </div>
+        <button class="btn btn-solid btn-big" type="submit">Donate now</button>
+      </form>
 
-      <p class="small" style="margin-top:14px">Card details go to the payment provider, never to this site. See the <a href="donations-policy.html">donation policy</a> and the <a href="privacy.html">privacy notice</a>.</p>
+      <p class="small" style="margin-top:16px">Your card details are entered on the payment provider's secure page and are never seen or stored by this site.</p>
     </div>
   </div>
 </section>
 
 <section class="band">
-  <div class="wrap narrow">
-    <h2>What happens after you give</h2>
-    <p>You get an emailed receipt from the payment provider with a reference number. The money lands in the home's account. If you gave by M-Pesa, the confirmation SMS from Safaricom is your receipt as well.</p>
-    <p>If something goes wrong, a card is declined, a prompt does not arrive, or a charge goes through twice, write to <a href="mailto:baldochildrenshome@gmail.com">baldochildrenshome@gmail.com</a> with the reference and the date. Refunds and duplicate charges are handled under the <a href="donations-policy.html">donation policy</a>.</p>
+  <div class="wrap two-col">
+    <div>
+      <h2>What happens after you give</h2>
+      <p>You get an email with a receipt and a reference number. If you gave by M-Pesa, the Safaricom message on your phone is a receipt as well. Keep either one.</p>
+      <p>If a card is declined, a prompt does not arrive, or a charge goes through twice, write to <a href="mailto:baldochildrenshome@gmail.com">baldochildrenshome@gmail.com</a> with the reference and the date. Duplicate and unauthorised charges are refunded.</p>
+      <h3>Other ways to give</h3>
+      <p>For a bank transfer, a cheque, or a gift of goods rather than money, contact the home first so it can be tracked against the right thing. Partner organisations in Italy and Britain can route a gift and issue local paperwork; the <a href="partners.html">partners page</a> names them.</p>
+    </div>
+    <div>
+      <h3>Where it is most needed</h3>
+      <ul class="needs">
+        <li><b>Secondary school fees</b><span>Fees, uniforms and books.</span></li>
+        <li><b>A replacement kitchen</b><span>Named in the home's own list of needs.</span></li>
+        <li><b>Water storage</b><span>The supply reaches the compound twice a week.</span></li>
+        <li><b>Medicine and clinic costs</b><span>For around a hundred children.</span></li>
+      </ul>
+      <p style="margin-top:24px"><a href="where-your-money-goes.html">Where your money goes</a></p>
+    </div>
   </div>
 </section>
 
-<section class="band band-tint">
-  <div class="wrap narrow">
-    <h2>Other ways to give</h2>
-    <p>For a bank transfer, a cheque, or a gift of goods rather than money, contact the home first so the payment can be tracked against the right thing. The sisters keep a record of what comes in and what it was given for.</p>
-    <p>If you are giving from outside Kenya and want a tax receipt in your own country, say so when you write. There are existing partner organisations in Italy and in Britain that can route a gift and issue the paperwork. Details are on the <a href="partners.html">partners page</a>.</p>
-    <h3>Where it is most needed</h3>
-    <ul class="plain">
-      <li>Secondary school fees, uniforms and books.</li>
-      <li>A replacement for the kitchen.</li>
-      <li>Water storage, because the supply reaches the compound about twice a week.</li>
-      <li>Medicine and clinic costs.</li>
-    </ul>
-    <p><a href="where-your-money-goes.html">More on where your money goes</a></p>
-  </div>
-</section>
-
-<section class="band">
+<section class="band tint">
   <div class="wrap narrow">
     <h2>Questions people ask before giving</h2>
-    <h3>Is this the official site of the home?</h3>
-    <p>Not yet. This is a demonstration put together from the home's own documents and from what partner organisations have published. The home has not adopted it. Nothing here charges a card.</p>
-    <h3>Will I be signed up to anything?</h3>
-    <p>No. There is no newsletter, no mailing list, and no account to create. Give your email for the receipt and that is all it is used for.</p>
-    <h3>Can I give to one particular child?</h3>
-    <p>Ask the home. Sponsorship of an individual child is a conversation with the sisters, not a checkout, because it involves a child's privacy.</p>
+    <h3>Is my payment secure?</h3>
+    <p>Card details go directly to the payment provider, never to this site, and nothing about your card is stored here. The connection is encrypted end to end.</p>
+    <h3>Will I get a receipt?</h3>
+    <p>Yes, by email, straight away. M-Pesa donors also get the Safaricom confirmation.</p>
+    <h3>Can I give every month?</h3>
+    <p>A standing monthly gift is best arranged directly with the home, so that it can be recorded against school terms. Write to the sisters and they will set it up.</p>
+    <h3>Can I sponsor one particular child?</h3>
+    <p>That is a conversation with the home rather than a checkout, because it involves a child's privacy. Call <a href="tel:+254710238132">0710 238 132</a> or write.</p>
+    <h3>Will my donation be tax deductible?</h3>
+    <p>That depends on the home's registration and on the law where you pay tax. Ask for a receipt and check with your own adviser. The partner organisations in Italy and Britain may be able to issue local paperwork.</p>
   </div>
 </section>
 
+<section class="close-cta">
+  <div class="wrap">
+    <div>
+      <h2>Not sure which amount is useful?</h2>
+      <p>Ask the home what a school term costs, or what the kitchen needs. They will tell you plainly.</p>
+    </div>
+    <a class="btn btn-light btn-big" href="contact.html">Ask the home</a>
+  </div>
+</section>
 </main>
 
 <footer class="foot">
   <div class="wrap">
     <div class="cols">
-      <div>
+      <div class="about">
         <b>Fr. Baldo Children's Home</b>
-        <p style="margin-top:10px">C/o Little Daughters of the St. Joseph<br>P.O. Box 6, 20306 Ndaragwa<br>Nyandarua County, Kenya</p>
+        <p style="margin-top:12px">C/o Little Daughters of the St. Joseph<br>P.O. Box 6, 20306 Ndaragwa<br>Nyandarua County, Kenya</p>
         <p><a href="tel:+254710238132">0710 238 132</a><br><a href="mailto:baldochildrenshome@gmail.com">baldochildrenshome@gmail.com</a></p>
       </div>
       <div>
@@ -138,12 +152,18 @@
         </ul>
       </div>
       <div>
-        <h4>Giving and policies</h4>
+        <h4>Support</h4>
         <ul>
           <li><a href="donate.html">Donate</a></li>
           <li><a href="where-your-money-goes.html">Where your money goes</a></li>
           <li><a href="get-involved.html">Get involved</a></li>
           <li><a href="faq.html">Questions</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Policies</h4>
+        <ul>
           <li><a href="privacy.html">Privacy</a></li>
           <li><a href="cookies.html">Cookies</a></li>
           <li><a href="terms.html">Terms</a></li>
@@ -155,11 +175,13 @@
       </div>
     </div>
     <div class="base">
-      <span>Demonstration site. Not the official website of the home. Payments are in test mode.</span>
-      <span>Photographs: Esharelife Foundation.</span>
+      <span>Registered charitable community based organisation, under Ndaragwa Catholic Parish.</span>
+      <span>&copy; Fr. Baldo Children's Home</span>
     </div>
   </div>
 </footer>
+
+<div class="mobile-give"><a class="btn btn-solid" href="donate.html">Donate to the home</a></div>
 
 <script src="assets/js/site.js"></script>
 </body>

@@ -1,12 +1,22 @@
-// Payment setup. Replace paystackKey with the home's public key to go live.
-// While it is empty the donate form runs in test mode and sends you to thank-you.html
-// with a note saying no money moved.
+// Paste the home's Paystack public key here. While it is empty the form
+// validates and goes to the confirmation page without contacting Paystack.
 var paystackKey = "";
 
 function money(n, currency) {
   return currency === "KES" ? "KSh " + n.toLocaleString() : "$" + n.toLocaleString();
 }
 
+// mobile menu
+var toggle = document.querySelector(".nav-toggle");
+var nav = document.querySelector(".nav");
+if (toggle && nav) {
+  toggle.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+}
+
+// amount picker
 var currencySelect = document.querySelector("#currency");
 var amountInput = document.querySelector("#amount");
 var amountButtons = document.querySelectorAll(".amounts button");
@@ -36,7 +46,7 @@ amountButtons.forEach(function (b) {
   });
 });
 
-// pay form
+// checkout
 var donateForm = document.querySelector("#donate-form");
 if (donateForm) {
   donateForm.addEventListener("submit", function (e) {
@@ -50,9 +60,14 @@ if (donateForm) {
       amountInput.focus();
       return;
     }
+    if (!email) {
+      document.querySelector("#email").focus();
+      return;
+    }
 
     if (!paystackKey) {
-      location.href = "thank-you.html?amount=" + amount + "&currency=" + currency + "&method=" + method;
+      location.href = "thank-you.html?amount=" + amount + "&currency=" + currency +
+        "&method=" + method + "&email=" + encodeURIComponent(email);
       return;
     }
 
@@ -61,8 +76,8 @@ if (donateForm) {
     script.onload = function () {
       var handler = PaystackPop.setup({
         key: paystackKey,
-        email: email || "donations@baldochildrenshome.example",
-        amount: currency === "KES" ? amount * 100 : Math.round(amount * 100),
+        email: email,
+        amount: Math.round(amount * 100),
         currency: currency,
         channels: method === "mpesa" ? ["mobile_money"] : ["card"],
         callback: function (res) {
@@ -74,20 +89,5 @@ if (donateForm) {
       handler.openIframe();
     };
     document.body.appendChild(script);
-  });
-}
-
-// film loads only when clicked, so no third party runs before that
-var playBtn = document.querySelector("[data-video]");
-if (playBtn) {
-  playBtn.addEventListener("click", function () {
-    var id = playBtn.dataset.video;
-    var wrap = playBtn.parentNode;
-    var frame = document.createElement("iframe");
-    frame.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
-    frame.title = "Film about the home, recorded in 2015";
-    frame.allow = "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-    frame.allowFullscreen = true;
-    wrap.replaceChild(frame, playBtn);
   });
 }

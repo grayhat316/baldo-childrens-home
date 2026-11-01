@@ -4,44 +4,111 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#123f31">
 <title>Thank you | Fr. Baldo Children's Home</title>
+<meta name="description" content="Your donation to Fr. Baldo Children's Home has been received.">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+
 <header class="site-head">
-  <div class="wrap">
+  <div class="wrap bar">
     <a class="brand" href="index.html">
       <b>Fr. Baldo Children's Home</b>
       <span>Ndaragwa, Nyandarua County, Kenya</span>
     </a>
-    <nav class="site-nav"><a class="btn btn-donate" href="index.html">Back to the site</a></nav>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><i></i>Menu</button>
+    <nav class="nav" id="nav">
+        <a href="our-story.html">Our story</a>
+        <a href="life-at-the-home.html">Life at the home</a>
+        <a href="education.html">Education</a>
+        <a href="partners.html">Partners</a>
+        <a href="get-involved.html">Get involved</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn btn-solid head-cta" href="donate.html" aria-current="page">Donate</a>
+    </nav>
   </div>
 </header>
+
 <main id="main">
-<section class="band" style="border-top:0;padding-top:48px">
+<section class="band" style="border-top:0;padding-top:64px">
   <div class="wrap narrow">
-    <h1 id="headline">Thank you</h1>
-    <p class="lede" id="summary">Your donation was recorded.</p>
-    <div class="note" id="demo-note">
-      <p style="margin:0"><b>Test mode.</b> This is a demonstration, so no money was taken and no receipt will be sent. The real version of this page would show your reference number and confirm the amount.</p>
-    </div>
-    <h2>What would happen next</h2>
-    <p>You would get an email from the payment provider with a reference number, and the money would settle into the home's account. Keep the message or the Safaricom confirmation if you gave by M-Pesa. Either one is what the home needs if a payment has to be traced.</p>
-    <p>If anything looks wrong, write to <a href="mailto:baldochildrenshome@gmail.com">baldochildrenshome@gmail.com</a> with the reference and the date, rather than giving again.</p>
-    <p style="margin-top:26px"><a href="index.html">Back to the home page</a> &nbsp; <a href="where-your-money-goes.html">Where your money goes</a></p>
+    <h1>Thank you</h1>
+    <p class="lede" id="summary">Your donation has been received.</p>
+    <p>An email is on its way with your receipt and a reference number. Keep it: it is what the home needs if a payment ever has to be traced. If you gave by M-Pesa, the Safaricom message on your phone is your receipt too.</p>
+    <h2>What your money does</h2>
+    <p>Food the farm does not produce, school fees for the coming term, uniforms, and medicine. If you asked for your gift to go to something specific, the sisters will use it for that and tell you when it has been spent.</p>
+    <p>If anything about the payment looks wrong, write to <a href="mailto:baldochildrenshome@gmail.com">baldochildrenshome@gmail.com</a> with the reference and the date rather than giving again.</p>
+    <p style="margin-top:30px"><a class="btn" href="index.html">Back to the home</a></p>
   </div>
 </section>
-</main>
 <script>
 var q = new URLSearchParams(location.search);
 var amount = q.get("amount");
 var currency = q.get("currency") || "USD";
 var method = q.get("method");
+var ref = q.get("ref");
 if (amount) {
   var shown = currency === "KES" ? "KSh " + Number(amount).toLocaleString() : "$" + Number(amount).toLocaleString();
   document.getElementById("summary").textContent =
-    shown + (method === "mpesa" ? " by M-Pesa" : " by card") + ". This is what the real confirmation page would show.";
+    shown + " received" + (method === "mpesa" ? " by M-Pesa." : " by card.") +
+    (ref ? " Reference " + ref + "." : "");
 }
 </script>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div class="about">
+        <b>Fr. Baldo Children's Home</b>
+        <p style="margin-top:12px">C/o Little Daughters of the St. Joseph<br>P.O. Box 6, 20306 Ndaragwa<br>Nyandarua County, Kenya</p>
+        <p><a href="tel:+254710238132">0710 238 132</a><br><a href="mailto:baldochildrenshome@gmail.com">baldochildrenshome@gmail.com</a></p>
+      </div>
+      <div>
+        <h4>The home</h4>
+        <ul>
+          <li><a href="our-story.html">Our story</a></li>
+          <li><a href="the-children.html">The children</a></li>
+          <li><a href="life-at-the-home.html">Life at the home</a></li>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="outreach.html">Outreach</a></li>
+          <li><a href="partners.html">Partners</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="where-your-money-goes.html">Where your money goes</a></li>
+          <li><a href="get-involved.html">Get involved</a></li>
+          <li><a href="faq.html">Questions</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+          <li><a href="terms.html">Terms</a></li>
+          <li><a href="donations-policy.html">Donation policy</a></li>
+          <li><a href="safeguarding.html">Safeguarding</a></li>
+          <li><a href="accountability.html">Accountability</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <span>Registered charitable community based organisation, under Ndaragwa Catholic Parish.</span>
+      <span>&copy; Fr. Baldo Children's Home</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-give"><a class="btn btn-solid" href="donate.html">Donate to the home</a></div>
+
+<script src="assets/js/site.js"></script>
 </body>
 </html>
