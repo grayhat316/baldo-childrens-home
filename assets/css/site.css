@@ -747,3 +747,18 @@ main p, main li { max-width: 74ch; }
 }
 .player:fullscreen.filling video, .player:-webkit-full-screen.filling video { object-fit: cover; }
 .player::backdrop { background: #000; }
+
+
+/* small screens: the wordmark gives way to the menu */
+@media (max-width: 640px) {
+  .bar { gap: 12px; min-height: 64px; }
+  .brand { max-width: 66%; }
+  .brand b { font-size: .95rem; line-height: 1.15; letter-spacing: -.005em; }
+  .brand span { display: none; }
+  .nav-toggle { padding: 8px 10px; font-size: .8rem; }
+  .nav { top: calc(100% + 8px); }
+}
+@media (max-width: 380px) {
+  .brand b { font-size: .88rem; }
+  .brand { max-width: 62%; }
+}
