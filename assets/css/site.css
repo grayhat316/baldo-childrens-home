@@ -637,3 +637,24 @@ main p, main li { max-width: 70ch; }
 .close-cta { padding: 54px 0; }
 h2 { margin-top: 1.6em; }
 .band > .wrap > h2:first-child { margin-top: 0; }
+
+
+/* ============ the film: fill the container, keep the true 16:9 frame ============ */
+.video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #000;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+.video { margin: 0; }
+.video figcaption { margin-top: 10px; }
+/* native controls already carry play, scrub, volume, settings and fullscreen */
+
+/* ============ text blocks fill their column instead of hugging the left ============ */
+.wrap { max-width: 1080px; }
+.narrow { max-width: 1080px; }
+main p, main li { max-width: 74ch; }
+.intro p { max-width: 74ch; }
