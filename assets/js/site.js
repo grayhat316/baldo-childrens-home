@@ -1,6 +1,8 @@
-// Paste the home's Paystack public key here. While it is empty the form
-// validates and goes to the confirmation page without contacting Paystack.
-var paystackKey = "";
+// Payment configuration.
+// paystackKey: the PUBLIC key of whichever account should receive the money.
+// forceCurrency: set to "KES" if that account only settles in shillings; leave "" to offer both.
+var paystackKey = "pk_test_5779ebb41162e2d6fba3077de7e6503cd5f56e54";
+var forceCurrency = "KES";
 
 function money(n, currency) {
   return currency === "KES" ? "KSh " + n.toLocaleString() : "$" + n.toLocaleString();
@@ -20,6 +22,15 @@ if (toggle && nav) {
 var currencySelect = document.querySelector("#currency");
 var amountInput = document.querySelector("#amount");
 var amountButtons = document.querySelectorAll(".amounts button");
+
+// if the receiving account settles in one currency only, remove the others
+if (forceCurrency && currencySelect) {
+  Array.prototype.slice.call(currencySelect.options).forEach(function (o) {
+    if (o.value !== forceCurrency) currencySelect.removeChild(o);
+  });
+  currencySelect.value = forceCurrency;
+  currencySelect.setAttribute("aria-label", "Currency, fixed at " + forceCurrency);
+}
 
 function paintAmounts() {
   if (!currencySelect) return;
