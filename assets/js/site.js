@@ -102,3 +102,25 @@ if (donateForm) {
     document.body.appendChild(script);
   });
 }
+
+
+// The film. YouTube refuses an embed whose referrer is a private address
+// (localhost, 127.0.0.1, 10.x, 192.168.x), so on those hosts we send the
+// visitor to YouTube instead of showing a dead player.
+var poster = document.querySelector(".video-poster");
+if (poster) {
+  poster.addEventListener("click", function (e) {
+    var host = location.hostname;
+    var isPrivate = host === "localhost" || host === "" ||
+      /^127\./.test(host) || /^10\./.test(host) ||
+      /^192\.168\./.test(host) || /^172\.(1[6-9]|2\d|3[01])\./.test(host);
+    if (isPrivate) return; // let the link open YouTube in a new tab
+    e.preventDefault();
+    var frame = document.createElement("iframe");
+    frame.src = "https://www.youtube-nocookie.com/embed/" + poster.dataset.video + "?rel=0&autoplay=1";
+    frame.title = "Film about the home, recorded in 2015";
+    frame.allow = "accelerometer; encrypted-media; gyroscope; picture-in-picture";
+    frame.allowFullscreen = true;
+    poster.parentNode.replaceChild(frame, poster);
+  });
+}

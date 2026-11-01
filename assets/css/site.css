@@ -408,3 +408,19 @@ details.faq p { margin: 10px 0 0; color: var(--ink-soft); }
   .gallery { grid-template-columns: 1fr; }
   .gallery img { height: 230px; }
 }
+
+/* ---------- video poster ---------- */
+.video-poster { position: relative; display: block; overflow: hidden; }
+.video-poster img { width: 100%; height: auto; }
+.video-poster::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(12,44,34,.10) 0%, rgba(12,44,34,.55) 100%);
+}
+.video-play {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  z-index: 2; background: var(--green); color: #fff; border: 1px solid rgba(255,255,255,.7);
+  padding: 12px 24px; font-size: .95rem; white-space: nowrap;
+  background: rgba(18,63,49,.92);
+}
+.video-poster:hover .video-play { background: var(--green-2); }
+.video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
