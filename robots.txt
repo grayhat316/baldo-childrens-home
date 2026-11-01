@@ -1,4 +1,6 @@
-# Demonstration site. Kept out of search engines until the home adopts it
-# and gives written consent for photographs of the children.
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /thank-you.html
+Disallow: /donation-failed.html
+
+Sitemap: https://baldo-home-demo.onrender.com/sitemap.xml

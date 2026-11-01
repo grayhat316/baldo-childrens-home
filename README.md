@@ -61,6 +61,14 @@ and are credited on every page they appear. They show identifiable children. Tha
 repo is private, every page carries `noindex`, and `robots.txt` disallows everything. Do not make
 it public and do not let search engines index it until the home gives written consent.
 
+## Discoverability
+
+`robots.txt` allows crawling and points at `sitemap.xml`. Both use
+`https://baldo-home-demo.onrender.com` as the base URL. Change that to the real domain before launch,
+or the sitemap will point at the wrong host.
+
+The home page carries NGO structured data (name, address, phone, founding date, parish).
+
 ## Pages
 
 Main: `index`, `our-story`, `the-children`, `life-at-the-home`, `education`, `outreach`,

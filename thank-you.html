@@ -3,10 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#123f31">
 <title>Thank you | Fr. Baldo Children's Home</title>
 <meta name="description" content="Your donation to Fr. Baldo Children's Home has been received.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fr. Baldo Children's Home">
+<meta property="og:title" content="Thank you | Fr. Baldo Children's Home">
+<meta property="og:description" content="Your donation to Fr. Baldo Children's Home has been received.">
+<meta property="og:image" content="assets/img/dining-hall.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
@@ -26,13 +31,13 @@
         <a href="partners.html">Partners</a>
         <a href="get-involved.html">Get involved</a>
         <a href="contact.html">Contact</a>
-        <a class="btn btn-solid head-cta" href="donate.html" aria-current="page">Donate</a>
+        <a class="btn btn-solid head-cta" href="donate.html">Donate</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
-<section class="band" style="border-top:0;padding-top:64px">
+<section class="band" style="border-top:0;padding-top:56px">
   <div class="wrap narrow">
     <h1>Thank you</h1>
     <p class="lede" id="summary">Your donation has been received.</p>
@@ -40,13 +45,13 @@
     <h2>What your money does</h2>
     <p>Food the farm does not produce, school fees for the coming term, uniforms, and medicine. If you asked for your gift to go to something specific, the sisters will use it for that and tell you when it has been spent.</p>
     <p>If anything about the payment looks wrong, write to <a href="mailto:baldochildrenshome@gmail.com">baldochildrenshome@gmail.com</a> with the reference and the date rather than giving again.</p>
-    <p style="margin-top:30px"><a class="btn" href="index.html">Back to the home</a></p>
+    <p style="margin-top:30px"><a class="btn btn-solid" href="index.html">Back to the home</a> &nbsp; <a class="btn" href="where-your-money-goes.html">Where your money goes</a></p>
   </div>
 </section>
 <script>
 var q = new URLSearchParams(location.search);
 var amount = q.get("amount");
-var currency = q.get("currency") || "USD";
+var currency = q.get("currency") || "KES";
 var method = q.get("method");
 var ref = q.get("ref");
 if (amount) {
