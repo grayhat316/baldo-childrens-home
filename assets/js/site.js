@@ -98,7 +98,7 @@ if (donateForm) {
     var chargeAmount = currency === settleCurrency ? amount : Math.round(amount * fxRate);
 
     if (!paystackKey) {
-      location.href = "thank-you.html?amount=" + amount + "&currency=" + currency +
+      location.href = "/thank-you?amount=" + amount + "&currency=" + currency +
         "&charged=" + chargeAmount + "&chargedcur=" + settleCurrency +
         "&method=" + method + "&email=" + encodeURIComponent(email);
       return;
@@ -114,7 +114,7 @@ if (donateForm) {
         currency: settleCurrency,
         channels: method === "mpesa" ? ["mobile_money"] : ["card"],
         callback: function (res) {
-          location.href = "thank-you.html?ref=" + encodeURIComponent(res.reference) +
+          location.href = "/thank-you?ref=" + encodeURIComponent(res.reference) +
             "&amount=" + amount + "&currency=" + currency +
             "&charged=" + chargeAmount + "&chargedcur=" + settleCurrency +
             "&method=" + method;

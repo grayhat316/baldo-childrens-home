@@ -1,2 +1,4 @@
 shot-*.png
 assets/video/film.mp4
+serve.py
+__*.html

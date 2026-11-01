@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /thank-you.html
-Disallow: /donation-failed.html
+Disallow: /thank-you
+Disallow: /donation-failed
 
-Sitemap: https://baldo-home-demo.onrender.com/sitemap.xml
+Sitemap: https://baldochildrenshome.onrender.com/sitemap.xml
