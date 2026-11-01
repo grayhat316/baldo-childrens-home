@@ -424,3 +424,102 @@ details.faq p { margin: 10px 0 0; color: var(--ink-soft); }
 }
 .video-poster:hover .video-play { background: var(--green-2); }
 .video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
+
+
+/* ============ single background, no alternating tints ============ */
+:root {
+  --paper: #faf9f5;
+  --paper-2: #faf9f5;
+  --line: #e2dccd;
+}
+body { background: #faf9f5; }
+.band { border-top: 1px solid var(--line); }
+.tint { background: transparent; }
+.statement { background: transparent; }
+.foot { background: transparent; }
+
+/* links in running text: no underline, heavier weight */
+main a:not(.btn) {
+  text-decoration: none;
+  font-weight: 600;
+}
+main a:not(.btn):hover { text-decoration: underline; }
+.foot a, .crumbs a, .doclist a { text-decoration: none; font-weight: 600; }
+.foot a:hover, .doclist a:hover { text-decoration: underline; }
+
+/* ============ video: youtube-style play badge ============ */
+.video-play {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 74px; height: 52px; padding: 0; border: 0;
+  background: #ff0000; border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.28);
+}
+.video-play::after {
+  content: ""; display: block;
+  border-style: solid; border-width: 11px 0 11px 19px;
+  border-color: transparent transparent transparent #fff;
+  margin-left: 4px;
+}
+.video-poster:hover .video-play { background: #d90000; }
+.video-poster::after { background: none; }
+
+.video-note {
+  margin: 12px 0 0; font-size: .92rem; color: var(--ink-soft);
+}
+.video-note a { font-weight: 600; }
+.video-fallback {
+  margin: 14px 0 0; padding: 14px 16px; font-size: .93rem;
+  background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--clay);
+}
+.video-fallback[hidden] { display: none; }
+
+/* ============ mobile nav: full slide panel ============ */
+@media (max-width: 860px) {
+  .site-head { position: sticky; }
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: #faf9f5; padding: 84px 26px 40px;
+    overflow-y: auto; z-index: 60;
+    display: none; flex-direction: column; align-items: stretch; gap: 0;
+  }
+  .nav.open { display: flex; }
+  .nav a {
+    padding: 18px 0; font-size: 1.12rem; border-bottom: 1px solid var(--line);
+  }
+  .nav a[aria-current="page"] { color: var(--clay); }
+  .nav .head-cta { margin-top: 26px; padding: 16px; text-align: center; border: 0; font-size: 1rem; }
+  .bar { position: relative; z-index: 61; }
+  .nav-toggle { position: relative; z-index: 62; }
+
+/* ============ footer: one continuous column on phones ============ */
+  .foot .cols { grid-template-columns: 1fr; gap: 0; }
+  .foot .cols > div { padding: 22px 0; border-top: 1px solid var(--line); }
+  .foot .cols > div:first-child { border-top: 0; padding-top: 0; }
+  .foot h4 { margin-bottom: 6px; }
+  .foot ul { display: block; }
+  .foot li { margin: 0; }
+  .foot li a { display: block; padding: 10px 0; border-bottom: 1px solid rgba(226,220,205,.7); font-size: .96rem; }
+  .foot li:last-child a { border-bottom: 0; }
+}
+
+/* contact form on a light background */
+.contact-form .row-in input, .contact-form .row-in select, .contact-form .row-in textarea {
+  background: #fff; color: var(--ink); border: 1px solid var(--line);
+  width: 100%; padding: 14px; font: inherit;
+}
+.contact-form .field label { color: var(--ink-soft); }
+.contact-form textarea { resize: vertical; }
+.map-wrap { border: 1px solid var(--line); }
+.map-wrap iframe { width: 100%; height: 420px; border: 0; display: block; }
+@media (max-width: 560px) { .map-wrap iframe { height: 300px; } }
+
+/* the player sits on top of the poster; if it fails the poster is still there */
+.video-frame { position: relative; background: #0c2c22; overflow: hidden; }
+.video-poster { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; position: relative; }
+.video-poster img { display: block; width: 100%; height: auto; }
+#yt-host { position: absolute; inset: 0; z-index: 3; }
+#yt-host iframe { width: 100% !important; height: 100% !important; }
+.video-retry {
+  margin-left: 10px; background: none; border: 0; color: var(--clay);
+  font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; padding: 0;
+}

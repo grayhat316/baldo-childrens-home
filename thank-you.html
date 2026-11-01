@@ -54,11 +54,18 @@ var amount = q.get("amount");
 var currency = q.get("currency") || "KES";
 var method = q.get("method");
 var ref = q.get("ref");
+var charged = q.get("charged");
+var chargedCur = q.get("chargedcur");
 if (amount) {
   var shown = currency === "KES" ? "KSh " + Number(amount).toLocaleString() : "$" + Number(amount).toLocaleString();
+  var chargedText = "";
+  if (charged && chargedCur && chargedCur !== currency) {
+    chargedText = " Your card was charged " +
+      (chargedCur === "KES" ? "KSh " + Number(charged).toLocaleString() : "$" + Number(charged).toLocaleString()) + ".";
+  }
   document.getElementById("summary").textContent =
     shown + " received" + (method === "mpesa" ? " by M-Pesa." : " by card.") +
-    (ref ? " Reference " + ref + "." : "");
+    chargedText + (ref ? " Reference " + ref + "." : "");
 }
 </script>
 </main>

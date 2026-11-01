@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#123f31">
 <title>Contact | Fr. Baldo Children's Home</title>
-<meta name="description" content="Address, phone and email for the home in Ndaragwa, Nyandarua County, and what to know before you visit.">
+<meta name="description" content="Phone, email, a contact form and the map for Fr. Baldo Children's Home, Ndaragwa, Nyandarua County, Kenya.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Fr. Baldo Children's Home">
-<meta property="og:title" content="Contact | Fr. Baldo Children's Home">
-<meta property="og:description" content="Address, phone and email for the home in Ndaragwa, Nyandarua County, and what to know before you visit.">
+<meta property="og:title" content="Our story | Fr. Baldo Children's Home">
+<meta property="og:description" content="Phone, email, a contact form and the map for Fr. Baldo Children's Home, Ndaragwa, Nyandarua County, Kenya.">
 <meta property="og:image" content="assets/img/compound.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/css/site.css">
@@ -30,63 +30,96 @@
         <a href="education.html">Education</a>
         <a href="partners.html">Partners</a>
         <a href="get-involved.html">Get involved</a>
-        <a href="contact.html" aria-current="page">Contact</a>
+        <a href="contact.html">Contact</a>
         <a class="btn btn-solid head-cta" href="donate.html">Donate</a>
     </nav>
   </div>
 </header>
 
-<main id="main">
-<section class="page-hero">
+<main id="main"><section class="page-hero">
   <img class="bg" src="assets/img/compound.jpg" alt="" width="1024" height="683">
   <div class="scrim"></div>
   <div class="wrap">
     <p class="crumbs"><a href="index.html">Home</a> / Contact</p>
-    <h1>The home answers its own phone and its own email</h1>
-    <p class="standfirst">There is no call centre in between.</p>
+    <h1>How to reach the home</h1>
+    <p class="standfirst">The home is on the Nyeri to Nyahururu road at Ndaragwa, next to the Catholic parish. The sisters answer the phone and the email themselves, so allow a day or two for a reply.</p>
   </div>
 </section>
 
 <section class="band">
-  <div class="wrap split">
+  <div class="wrap two-col">
     <div>
-      <h2>Write or call</h2>
-      <p>Fr. Baldo Children's Home<br>
-      C/o Little Daughters of the St. Joseph<br>
-      P.O. Box 6, 20306 Ndaragwa<br>
-      Nyandarua County, Kenya</p>
-      <p>Phone: <a href="tel:+254710238132">0710 238 132</a><br>
-      Email: <a href="mailto:baldochildrenshome@gmail.com">baldochildrenshome@gmail.com</a></p>
-      <p style="color:#4a4638;font-size:.94rem">The address on the home's letterhead also lists a website, baldochildrenshome.kbo.co.ke, which no longer loads. If you were looking for it, this is its replacement.</p>
-      <p>For anything about a donation already made, have the reference number from your receipt to hand.</p>
+      <h2>Send a message</h2>
+      <p>Use the form and it will open in your email app, ready to send to the home. If you would rather write directly, the address is <a href="mailto:baldochildrenshome@gmail.com">baldochildrenshome@gmail.com</a>.</p>
+      <form id="contact-form" class="contact-form">
+        <div class="field" style="--f:1">
+          <label for="c-name">Your name</label>
+          <div class="row-in"><input id="c-name" name="name" type="text" required></div>
+        </div>
+        <div class="field">
+          <label for="c-email">Your email</label>
+          <div class="row-in"><input id="c-email" name="email" type="email" required></div>
+        </div>
+        <div class="field">
+          <label for="c-subject">What is it about</label>
+          <div class="row-in">
+            <select id="c-subject" name="subject">
+              <option>Visiting the home</option>
+              <option>Making a donation</option>
+              <option>Sponsoring a child</option>
+              <option>Volunteering</option>
+              <option>Something else</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="c-message">Message</label>
+          <div class="row-in"><textarea id="c-message" name="message" rows="6" required></textarea></div>
+        </div>
+        <button class="btn btn-solid btn-big" type="submit">Open in my email app</button>
+        <p class="small" id="contact-hint">Nothing is sent from this page. Your email app opens with the message filled in and you press send there.</p>
+      </form>
     </div>
-    <div class="factbox">
-      <h3>At a glance</h3>
-      <dl>
-        <div><dt>Place</dt><dd>Ndaragwa, Nyandarua County, Kenya</dd></div>
-        <div><dt>On the equator</dt><dd>211 km north-west of Nairobi</dd></div>
-        <div><dt>Managed by</dt><dd>The Little Daughters of St. Joseph</dd></div>
-        <div><dt>Under</dt><dd>Ndaragwa Catholic Parish</dd></div>
-        <div><dt>Visitors</dt><dd>Welcome, but call first</dd></div>
-        <div><dt>Guest house</dt><dd>On the compound, for visitors and volunteers</dd></div>
-      </dl>
+    <div>
+      <div class="factbox">
+        <h3>Direct</h3>
+        <dl>
+          <div><dt>Phone</dt><dd><a href="tel:+254710238132">0710 238 132</a></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:baldochildrenshome@gmail.com">baldochildrenshome@gmail.com</a></dd></div>
+          <div><dt>Post</dt><dd>Fr. Baldo Children's Home<br>C/o Little Daughters of the St. Joseph<br>P.O. Box 6, 20306 Ndaragwa<br>Nyandarua County, Kenya</dd></div>
+          <div><dt>Managed by</dt><dd>The Little Daughters of St. Joseph, under Ndaragwa Catholic Parish</dd></div>
+        </dl>
+      </div>
+      <p style="margin-top:24px;font-size:.94rem;color:var(--ink-soft)">For anything about a donation already made, have the reference number from your receipt ready. It is the fastest way to trace a payment.</p>
     </div>
   </div>
 </section>
 
-<section class="band tint">
-  <div class="wrap split rev">
-    <div>
-      <h2>Finding it</h2>
-      <p>Ndaragwa is in Nyandarua County, on the equator. The home sits next to the Catholic parish in the township.</p>
-      <p>Call before travelling. If you are coming from outside Kenya, ask what the road is like at that time of year before you set out.</p>
-      <p>If you are coming to volunteer, say so when you call, and say what you can do. It saves a conversation at the gate.</p>
+<section class="band">
+  <div class="wrap">
+    <h2>Find us</h2>
+    <p style="max-width:62ch">Ndaragwa is in Nyandarua County, 211 kilometres north-west of Nairobi, on the road between Nyeri and Nyahururu. The home sits beside the Catholic parish in the township.</p>
+    <div class="map-wrap" style="margin-top:26px">
+      <iframe title="Map showing Fr. Baldo Children's Home at Ndaragwa" loading="lazy"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=36.5167%2C-0.0626%2C36.5367%2C-0.0426&amp;layer=mapnik&amp;marker=-0.0525511%2C36.5266713"></iframe>
     </div>
-    <figure class="figure-tall"><img src="assets/img/compound.jpg" alt="The home's buildings" loading="lazy" width="1024" height="683"></figure>
+    <p style="margin-top:14px;font-size:.94rem;color:var(--ink-soft)">
+      Baldo Childrens Home, Nyeri-Nyahururu Road, Gwakungu, Ndaragwa. Coordinates -0.0525511, 36.5266713.
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=-0.0525511,36.5266713" target="_blank" rel="noopener">Open in Google Maps for directions</a>.
+    </p>
   </div>
 </section>
 
-</main>
+<section class="band">
+  <div class="wrap narrow">
+    <h2>If you are coming</h2>
+    <p>Ring the home before you travel, on <a href="tel:+254710238132">0710 238 132</a>, and say when you expect to arrive and what you are coming for. The sisters plan the day around the children, and a visitor who arrives unannounced is harder to fit in than one they know about.</p>
+    <p>There is a guest house on the compound, used by volunteers and by visitors who are staying more than a day. Ask about it in the same call.</p>
+    <p>Anyone who will spend time with the children is asked about safeguarding first. That applies to volunteers, to film crews and to donors who want to meet the children they have supported. It is not suspicion, it is the rule the home runs to.</p>
+    <p><a href="safeguarding.html">How the home handles visits, photographs and consent</a></p>
+  </div>
+</section>
+
 
 <footer class="foot">
   <div class="wrap">

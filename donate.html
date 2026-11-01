@@ -42,7 +42,7 @@
   <div class="scrim"></div>
   <div class="wrap">
     <p class="crumbs"><a href="index.html">Home</a> / Donate</p>
-    <h1>Give once, by card or M-Pesa</h1>
+    <h1>Donate to the home</h1>
     <p class="standfirst">Any amount is useful. The home spends it on food, school fees, uniforms and medicine, and your receipt comes by email immediately.</p>
   </div>
 </section>
@@ -70,11 +70,12 @@
           <div class="row-in">
             <input id="amount" name="amount" type="number" min="1" step="1" placeholder="Your amount" inputmode="numeric">
             <select id="currency" name="currency" aria-label="Currency">
-              <option value="KES">KES</option>
               <option value="USD">USD</option>
+              <option value="KES">KES</option>
             </select>
           </div>
         </div>
+        <p class="small" id="fx-note" aria-live="polite"></p>
         <div class="channels">
           <label><input type="radio" name="method" value="card" checked> Card</label>
           <label><input type="radio" name="method" value="mpesa"> M-Pesa</label>
