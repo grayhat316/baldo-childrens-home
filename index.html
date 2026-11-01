@@ -102,6 +102,21 @@
 
 <section class="band">
   <div class="wrap">
+    <div class="photo-pair">
+      <figure>
+        <img src="assets/img/dining-hall.jpg" alt="Children eating together in the dining hall at Ndaragwa" loading="lazy" width="1024" height="683">
+        <figcaption>Lunch in the dining hall. The food is grown on the home's own land wherever it can be.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/compound.jpg" alt="The buildings and grounds of the home" loading="lazy" width="1024" height="683">
+        <figcaption>Four pavilions and a nursery, on the road between Nyeri and Nyahururu.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
     <h2 style="max-width:22ch">What a child finds here</h2>
     <p style="max-width:62ch;color:#4a4638">Four things, in this order. Somewhere to sleep and eat, a doctor when they are ill, a school place paid for until they finish, and somewhere to go back to if there is family left.</p>
     <div class="pillars" style="margin-top:34px">
@@ -134,10 +149,18 @@
       <p><a class="more" href="/our-story">Read the full story</a></p>
     </div>
     <figure class="video">
-        <video controls preload="metadata" playsinline poster="assets/img/video-poster.jpg" width="1280" height="720">
-          <source src="assets/video/film-web.mp4" type="video/mp4">
-          Your browser cannot play this file. <a href="https://www.youtube.com/watch?v=dGLNG-MSjO8" target="_blank" rel="noopener">Watch the film on YouTube</a>.
-        </video>
+        <div class="player paused">
+          <video src="assets/video/film-web.mp4" poster="assets/img/video-poster.jpg" playsinline preload="metadata" aria-label="Film about the home, recorded in 2015"></video>
+          <button class="pl-big" type="button" aria-label="Play the film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="pl-bar">
+            <button class="pl-play" type="button" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+            <input class="pl-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek through the film">
+            <span class="pl-time">0:00 / 0:00</span>
+            <button class="pl-mute" type="button" aria-label="Mute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg></button>
+            <button class="pl-fill" type="button" aria-label="Fill the screen with the video" title="Fill the screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l7-7-1.4-1.4L4 17.2V20h0zM20 4l-7 7 1.4 1.4L20 6.8V4zM4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm14 0h2v6h-6v-2h4v-4z"/></svg></button>
+            <button class="pl-fs" type="button" aria-label="Full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5zm2 2v10h14V7H5z"/></svg></button>
+          </div>
+        </div>
         <figcaption>Filmed in 2015 for the Rotary Casa Maria project, on a visit by the Italian donors who paid for the dormitories.</figcaption>
       </figure>
   </div>

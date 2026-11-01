@@ -658,3 +658,63 @@ h2 { margin-top: 1.6em; }
 .narrow { max-width: 1080px; }
 main p, main li { max-width: 74ch; }
 .intro p { max-width: 74ch; }
+
+
+/* ============ photo pair: breaks up the text ============ */
+.photo-pair { display: grid; grid-template-columns: 1.45fr 1fr; gap: 16px; align-items: end; }
+.photo-pair figure { margin: 0; }
+.photo-pair img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-pair figure:first-child img { aspect-ratio: 4 / 3; }
+.photo-pair figure:last-child img { aspect-ratio: 3 / 4; }
+.photo-pair figcaption { font-size: .82rem; color: var(--ink-soft); padding-top: 8px; }
+@media (max-width: 700px) {
+  .photo-pair { grid-template-columns: 1fr; gap: 12px; }
+  .photo-pair figure:last-child img { aspect-ratio: 4 / 3; }
+}
+
+/* ============ player with its own controls ============ */
+.player { position: relative; background: #000; overflow: hidden; }
+.player video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
+.player.filling video { object-fit: cover; }
+
+.pl-big {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 74px; height: 52px; border: 0; border-radius: 12px; cursor: pointer;
+  background: rgba(255,0,0,.92); display: flex; align-items: center; justify-content: center;
+}
+.pl-big svg { width: 22px; height: 22px; fill: #fff; margin-left: 3px; }
+.player.playing .pl-big { display: none; }
+
+.pl-bar {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px 12px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.72) 55%, rgba(0,0,0,.85) 100%);
+  opacity: 0; transition: opacity .2s ease;
+}
+.player:hover .pl-bar, .player:focus-within .pl-bar, .player.paused .pl-bar { opacity: 1; }
+@media (hover: none) { .pl-bar { opacity: 1; } }
+
+.pl-bar button {
+  background: none; border: 0; padding: 6px; cursor: pointer; line-height: 0;
+  flex: 0 0 auto;
+}
+.pl-bar button svg { width: 20px; height: 20px; fill: #fff; }
+.pl-bar button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.pl-seek {
+  -webkit-appearance: none; appearance: none; flex: 1 1 auto; height: 4px;
+  background: rgba(255,255,255,.35); border-radius: 2px; cursor: pointer;
+}
+.pl-seek::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%;
+  background: #fff; border: 0;
+}
+.pl-seek::-moz-range-thumb { width: 13px; height: 13px; border-radius: 50%; background: #fff; border: 0; }
+
+.pl-time { color: #fff; font-size: .82rem; font-variant-numeric: tabular-nums; flex: 0 0 auto; }
+.pl-bar button.on svg { fill: #7dd3a8; }
+
+/* fullscreen: black surround, video at its own shape, controls still there */
+.player:fullscreen, .player:-webkit-full-screen { width: 100%; height: 100%; display: flex; align-items: center; }
+.player:fullscreen video, .player:-webkit-full-screen video { width: 100%; height: 100%; aspect-ratio: auto; }
