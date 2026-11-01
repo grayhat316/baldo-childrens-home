@@ -49,14 +49,14 @@
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><i></i>Menu</button>
     <nav class="nav" id="nav">
+        <a href="index.html" aria-current="page">Home</a>
         <a href="our-story.html">Our story</a>
         <a href="life-at-the-home.html">Life at the home</a>
         <a href="education.html">Education</a>
         <a href="partners.html">Partners</a>
         <a href="get-involved.html">Get involved</a>
         <a href="contact.html">Contact</a>
-        <a class="btn btn-solid head-cta" href="donate.html">Donate</a>
-    </nav>
+        <a class="btn btn-solid head-cta" href="donate.html">Donate</a></nav>
   </div>
 </header>
 
@@ -70,9 +70,18 @@
     <p class="lede">Fr. Baldo Children's Home is in Ndaragwa, Nyandarua County, on the equator, 211 kilometres north-west of Nairobi. Around a hundred children live here, from babies to students in college. The Little Daughters of St. Joseph run it, and the parish that started it still holds it as its own work.</p>
     <div class="actions">
       <a class="btn btn-light btn-big" href="donate.html">Donate to the home</a>
-      <a class="btn btn-ghost btn-big" href="#film">Watch the film</a>
+      <a class="btn btn-ghost btn-big" href="where-your-money-goes.html">Where your money goes</a>
     </div>
     <p class="call" style="margin-top:22px">Or call the home on <a href="tel:+254710238132">0710 238 132</a></p>
+  </div>
+</section>
+
+
+<section class="band intro">
+  <div class="wrap narrow">
+    <p class="intro-line">Fr. Baldo Children's Home has been taking in children from Ndaragwa and the villages around it since 1993. It is a parish home, run by the Little Daughters of St. Joseph, and it stays open because people give.</p>
+    <p>Around a hundred children live on the compound at any one time. Some arrive as babies and stay until they finish school. Others are with their families again within a year. The home pays for school either way, and it keeps paying after a child has gone back home if the family cannot manage the fees.</p>
+    <p>This site is here so that someone who has never heard of the home can find it, see what it costs to run, and give towards it directly.</p>
   </div>
 </section>
 
@@ -107,21 +116,14 @@
       <h2>Some of it is easier to watch than to read</h2>
       <p>Rotary filmed a visit in 2015 for the Italian donors who built the dormitories. It shows the compound, the classrooms, the dining hall and the farm that feeds the kitchen.</p>
       <p>The farm is not a side project. Maize, wheat, potatoes, vegetables, milk and eggs come off that land. The surplus is sold at the market in Ndaragwa and pays the water and electricity.</p>
-      <p><a href="our-story.html">Read the full story</a></p>
+      <p><a class="more" href="our-story.html">Read the full story</a></p>
     </div>
     <figure class="video">
-        <div class="video-frame" data-video="dGLNG-MSjO8">
-          <button class="video-poster" type="button" aria-label="Play the 2015 film">
-            <img src="assets/img/video-poster.jpg" alt="Children sitting outside the home in 2015" width="1280" height="720">
-            <span class="video-play" aria-hidden="true"></span>
-          </button>
-        </div>
-        <figcaption>Filmed in 2015 for the Rotary Casa Maria project.</figcaption>
-        <div class="video-fallback" hidden>
-          <span class="msg">The film did not load.</span>
-          <a href="https://www.youtube.com/watch?v=dGLNG-MSjO8" target="_blank" rel="noopener">Watch it on YouTube</a>
-          <button type="button" class="video-retry">Try again</button>
-        </div>
+        <video controls preload="metadata" playsinline poster="assets/img/video-poster.jpg" width="1280" height="720">
+          <source src="assets/video/film-web.mp4" type="video/mp4">
+          Your browser cannot play this file. <a href="https://www.youtube.com/watch?v=dGLNG-MSjO8" target="_blank" rel="noopener">Watch the film on YouTube</a>.
+        </video>
+        <figcaption>Filmed in 2015 for the Rotary Casa Maria project, on a visit by the Italian donors who paid for the dormitories.</figcaption>
       </figure>
   </div>
 </section>
@@ -135,7 +137,7 @@
       <figure><img src="assets/img/dining-hall.jpg" alt="Children eating together in the dining hall" loading="lazy" width="1024" height="683"></figure>
       <figure><img src="assets/img/baldo-house-2.jpg" alt="Children having lunch outside" loading="lazy" width="1024" height="576"></figure>
     </div>
-    <p style="margin-top:26px"><a href="life-at-the-home.html">More about daily life</a></p>
+    <p style="margin-top:26px"><a class="more" href="life-at-the-home.html">More about daily life</a></p>
   </div>
 </section>
 
@@ -150,7 +152,7 @@
       <div><dt>2020</dt><dd>A minibus is bought so the children can get to the schools in the area.</dd></div>
       <div><dt>Now</dt><dd>The ten year Rotary agreement has ended. The home runs on its farm, on a handful of Italian and British supporters, and on what it can raise.</dd></div>
     </dl>
-    <p style="margin-top:26px"><a href="our-story.html">The full story</a></p>
+    <p style="margin-top:26px"><a class="more" href="our-story.html">The full story</a></p>
   </div>
 </section>
 
@@ -164,7 +166,7 @@
         <li><b>School uniforms</b><span>For children joining the state schools nearby.</span></li>
         <li><b>Water storage</b><span>The supply reaches the compound about twice a week.</span></li>
       </ul>
-      <p style="margin-top:26px"><a href="where-your-money-goes.html">Where your money goes</a></p>
+      <p style="margin-top:26px"><a class="more" href="where-your-money-goes.html">Where your money goes</a></p>
     </div>
     <figure><img src="assets/img/baldo-house-3.jpg" alt="Children eating a meal of beans and maize at the home" loading="lazy" width="1024" height="576"></figure>
   </div>
@@ -276,7 +278,6 @@
   </div>
 </footer>
 
-<div class="mobile-give"><a class="btn btn-solid" href="donate.html">Donate to the home</a></div>
 
 <script src="assets/js/site.js"></script>
 </body>

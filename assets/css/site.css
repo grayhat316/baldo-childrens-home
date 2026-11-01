@@ -242,8 +242,7 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
 }
 
 /* ---------- mobile donate bar ---------- */
-.mobile-give {
-  display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+.mobile-give { /* retired */ display: none !important; position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
   background: var(--green); padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
   border-top: 1px solid rgba(255,255,255,.18);
 }
@@ -523,3 +522,118 @@ main a:not(.btn):hover { text-decoration: underline; }
   margin-left: 10px; background: none; border: 0; color: var(--clay);
   font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; padding: 0;
 }
+
+
+/* ============ intro paragraph under the hero ============ */
+.intro { border-top: 0; }
+.intro-line {
+  font-family: Georgia, serif; font-size: clamp(1.18rem, 1.9vw, 1.5rem);
+  line-height: 1.5; color: var(--green); margin-bottom: 1.1em;
+}
+.intro p { color: #3d3a30; }
+
+/* ============ read-more links ============ */
+.more { display: inline-flex; align-items: baseline; gap: 8px; }
+.more::after {
+  content: "\2192"; font-weight: 400;
+  transition: transform .16s ease;
+}
+.more:hover::after { transform: translateX(4px); }
+
+/* ============ footer: colour that belongs to the site ============ */
+.foot {
+  background: var(--green); color: #e6e1d2;
+  border-top: 1px solid var(--green-2);
+}
+.foot b, .foot h4 { color: #f2ede0; }
+.foot p, .foot .about p { color: #c9c3b2; }
+.foot a { color: #f2ede0; }
+.foot a:hover { color: #fff; }
+.foot .base { color: #a9b7ae; border-top-color: rgba(255,255,255,.16); }
+.foot li a { display: block; padding: 4px 0; }
+.foot li a:hover { color: #fff; }
+
+/* ============ buttons respond to a press ============ */
+.btn { transition: background .16s ease, color .16s ease, border-color .16s ease, transform .12s ease; }
+.btn:active { transform: translateY(1px) scale(.995); }
+
+/* ============ mobile menu: a panel sized to its contents ============ */
+@media (max-width: 860px) {
+  .site-head { position: sticky; }
+  .bar { position: relative; }
+
+  .nav {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 12px;
+    left: auto;
+    bottom: auto;
+    width: min(310px, calc(100vw - 24px));
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: 0 22px 44px rgba(18, 63, 49, .18);
+    padding: 6px 18px;
+    display: block;
+    opacity: 0;
+    transform: translateY(-12px) scale(.97);
+    transform-origin: top right;
+    pointer-events: none;
+    transition: opacity .18s ease, transform .22s cubic-bezier(.22, .9, .28, 1);
+    z-index: 60;
+  }
+  .nav.open { opacity: 1; transform: none; pointer-events: auto; }
+
+  .nav a {
+    display: block; padding: 14px 0; font-size: 1.02rem;
+    border-bottom: 1px solid var(--line); color: var(--ink);
+  }
+  .nav a:last-child { border-bottom: 0; }
+  .nav a[aria-current="page"] { color: var(--clay); }
+  .nav .head-cta {
+    margin: 14px 0 10px; padding: 13px; text-align: center;
+    border: 1px solid var(--green); font-size: .97rem;
+  }
+
+  /* footer: two columns of links, about block across the top,
+     and the policies list split across both columns underneath */
+  .foot .cols { grid-template-columns: 1fr 1fr; gap: 0 22px; }
+  .foot .cols > div:first-child { grid-column: 1 / -1; padding-bottom: 18px; }
+  .foot .cols > div:nth-child(4) { grid-column: 1 / -1; }
+  .foot .cols > div:nth-child(4) ul { columns: 2; column-gap: 22px; }
+  .foot .cols > div { padding: 18px 0 8px; border-top: 1px solid rgba(255,255,255,.14); }
+  .foot li a { padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+  .foot li:last-child a { border-bottom: 0; }
+  .foot { padding-bottom: 40px; }
+}
+
+@media (max-width: 520px) {
+  .nav { right: 10px; width: calc(100vw - 20px); }
+}
+
+
+/* ============ one left edge for every block, tighter vertical rhythm ============ */
+.wrap { max-width: 1140px; padding: 0 26px; }
+
+/* the narrow column starts at the same place as everything else;
+   reading length is capped on the paragraphs instead of the container */
+.narrow { max-width: 1140px; margin-left: auto; margin-right: auto; }
+main p, main li { max-width: 70ch; }
+.hero p.lede, .page-hero .standfirst { max-width: 62ch; }
+.statement p { max-width: 30em; }
+
+/* hero text lines up with the body content instead of sitting in the middle */
+.hero .wrap, .page-hero .wrap {
+  width: 100%; max-width: 1140px; margin-left: auto; margin-right: auto;
+}
+.hero .wrap { padding-top: 124px; padding-bottom: 52px; }
+.page-hero .wrap { padding-top: 104px; padding-bottom: 40px; }
+
+/* closer sections */
+.band { padding: 56px 0; }
+.statement { padding: 54px 0; }
+.give { padding: 56px 0; }
+.close-cta { padding: 54px 0; }
+h2 { margin-top: 1.6em; }
+.band > .wrap > h2:first-child { margin-top: 0; }

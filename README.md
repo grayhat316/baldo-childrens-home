@@ -54,6 +54,22 @@ Stripe was considered and rejected: it does not support M-Pesa at all.
 6. M-Pesa paybill or till number, if they would rather donors pay straight to the home than
    through a card processor.
 
+## The film
+
+`assets/video/film-web.mp4` is a copy of the 2015 Rotary film, 4:46, 61MB, served from the
+site itself. It plays on any host, including localhost, with no YouTube player involved.
+
+The footage belongs to the people who made it (Rotary / Bruno Scovazzi). It is here so the
+home can see the site working with the real film. Before this goes public, either get written
+permission from the film's owner, or swap the `<video>` element back to a YouTube embed:
+
+```html
+<iframe src="https://www.youtube-nocookie.com/embed/dGLNG-MSjO8?rel=0" allowfullscreen></iframe>
+```
+
+Note that YouTube refuses to play an embed whose referrer is a private address, so the embed
+will not work on localhost. The self-hosted file is the only way to demo it locally.
+
 ## Photographs
 
 The three photographs and the video still come from Esharelife Foundation's page about the home,
