@@ -139,6 +139,9 @@ if (donateForm) {
   var ICON_VOL = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>';
   var ICON_MUTE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm12.7.1 1.4 1.4-2 2 2 2-1.4 1.4-2-2-2 2-1.4-1.4 2-2-2-2 1.4-1.4 2 2 2-2z"/></svg>';
 
+  var ICON_ENTER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5zm2 2v10h14V7H5z"/></svg>';
+  var ICON_EXIT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h2v6H5V7h4V3zm4 0h2v4h4v2h-6V3zM5 15h6v6H9v-4H5v-2zm10 0h4v2h-4v4h-2v-6z"/></svg>';
+
   function clock(t) {
     if (!isFinite(t) || t < 0) return "0:00";
     var m = Math.floor(t / 60), s = Math.floor(t % 60);
@@ -177,6 +180,11 @@ if (donateForm) {
       if (time) time.textContent = clock(v.currentTime) + " / " + clock(v.duration);
       if (seek && v.duration) seek.value = Math.round((v.currentTime / v.duration) * 1000);
       if (note) note.hidden = !(v.error || stuck);
+      if (fs) {
+        var big = player.classList.contains("theatre") || !!isFs();
+        fs.innerHTML = big ? ICON_EXIT : ICON_ENTER;
+        fs.setAttribute("aria-label", big ? "Exit the big screen" : "Full screen");
+      }
     }
 
     function start() {
@@ -196,7 +204,29 @@ if (donateForm) {
       if (v.paused || v.ended) start(); else v.pause();
     }
 
-    [big, play, v].forEach(function (el) { if (el) el.addEventListener("click", toggle); });
+    if (big) big.addEventListener("click", toggle);
+    if (play) play.addEventListener("click", toggle);
+
+    v.addEventListener("click", function () {
+      var onStage = player.classList.contains("theatre") || !!isFs();
+      if (!onStage) { toggle(); return; }
+      var hidden = player.classList.toggle("ui-hidden");
+      clearTimeout(player._uiTimer);
+      if (!hidden) {
+        player._uiTimer = setTimeout(function () {
+          if (!v.paused) player.classList.add("ui-hidden");
+        }, 3000);
+      }
+    });
+
+    player.addEventListener("mousemove", function () {
+      if (!player.classList.contains("theatre")) return;
+      player.classList.remove("ui-hidden");
+      clearTimeout(player._uiTimer);
+      player._uiTimer = setTimeout(function () {
+        if (!v.paused) player.classList.add("ui-hidden");
+      }, 3000);
+    });
 
     ["play", "pause", "ended", "timeupdate", "loadedmetadata", "volumechange", "canplay", "error"]
       .forEach(function (ev) { v.addEventListener(ev, paint); });
@@ -230,6 +260,7 @@ if (donateForm) {
 
     function openBig() {
       player.classList.add("theatre");
+      player.classList.remove("ui-hidden");
       document.documentElement.classList.add("theatre-open");
       // ask the browser for real fullscreen too, but never depend on it
       if (player.requestFullscreen) {
@@ -241,6 +272,7 @@ if (donateForm) {
     function closeBig() {
       player.classList.remove("theatre");
       player.classList.remove("filling");
+      player.classList.remove("ui-hidden");
       document.documentElement.classList.remove("theatre-open");
       if (fill) fill.classList.remove("on");
       if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
