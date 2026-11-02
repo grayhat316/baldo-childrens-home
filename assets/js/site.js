@@ -1,8 +1,4 @@
-// swap this for the live key once the home's account is activated
-var paystackKey = "pk_test_5779ebb41162e2d6fba3077de7e6503cd5f56e54";
-var settleCurrency = "KES";
-var defaultCurrency = "USD";
-var fxRate = 129.9; // live rate replaces this on load
+var paystackKey = "pk_test_5779ebb41162e2d6fba3077de7e6503cd5f56e54";  // TODO: live key when the home's account is on
 
 function money(n, currency) {
   return currency === "KES" ? "KSh " + n.toLocaleString() : "$" + n.toLocaleString();
@@ -16,6 +12,10 @@ if (toggle && nav) {
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
   });
 }
+
+var settleCurrency = "KES";
+var defaultCurrency = "USD";
+var fxRate = 129.9;
 
 var currencySelect = document.querySelector("#currency");
 var amountInput = document.querySelector("#amount");
