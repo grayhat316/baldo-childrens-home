@@ -51,7 +51,6 @@ p { margin: 0 0 1.15em; }
 }
 .skip:focus { left: 10px; top: 10px; }
 
-/* ---------- header ---------- */
 .site-head {
   position: sticky; top: 0; z-index: 40;
   background: rgba(251, 248, 242, .97);
@@ -81,7 +80,6 @@ p { margin: 0 0 1.15em; }
 }
 .nav-toggle i { display: block; width: 18px; height: 2px; background: var(--ink); box-shadow: 0 5px 0 var(--ink), 0 -5px 0 var(--ink); }
 
-/* ---------- buttons ---------- */
 .nav a.head-cta, .btn { flex: 0 0 auto; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -100,7 +98,6 @@ p { margin: 0 0 1.15em; }
 .btn-ghost:hover { background: #fff; color: var(--green); border-color: #fff; }
 .head-cta { padding: 12px 22px; font-size: .93rem; }
 
-/* ---------- hero ---------- */
 .hero {
   position: relative; color: #fff; background: var(--green);
   min-height: 72vh; display: flex; align-items: flex-end;
@@ -121,7 +118,6 @@ p { margin: 0 0 1.15em; }
 .hero .call { font-size: .95rem; color: #e7e1d2; }
 .hero .call a { color: #fff; }
 
-/* ---------- bands ---------- */
 .band { padding: 84px 0; border-top: 1px solid var(--line); }
 .tint { background: var(--paper-2); }
 .dark { background: var(--green); color: #f3eee1; }
@@ -135,7 +131,6 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
 
 .lede { font-size: clamp(1.05rem, 1.5vw, 1.2rem); }
 
-/* ---------- statement ---------- */
 .statement { padding: 88px 0; }
 .statement p {
   font-family: Georgia, serif; font-size: clamp(1.3rem, 2.3vw, 1.85rem);
@@ -143,7 +138,6 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
 }
 .statement .who { font-family: inherit; font-size: .9rem; color: var(--ink-soft); }
 
-/* ---------- timeline ---------- */
 .timeline { margin: 0; padding: 0; }
 .timeline > div {
   display: grid; grid-template-columns: 120px 1fr; gap: 28px;
@@ -153,10 +147,8 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
 .timeline dt { font-family: Georgia, serif; font-size: 1.25rem; color: var(--clay); }
 .timeline dd { margin: 0; }
 
-/* ---------- video ---------- */
 .video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
 
-/* ---------- donate ---------- */
 .give { background: var(--green); color: #f3eee1; padding: 84px 0; }
 .give .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
 .give h2 { color: #fff; margin-top: 0; font-size: clamp(1.7rem, 3vw, 2.5rem); }
@@ -196,7 +188,6 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
 .give .btn-solid { background: #fbf8f2; color: var(--green); border-color: #fbf8f2; width: 100%; }
 .give .btn-solid:hover { background: #fff; color: var(--green-2); }
 
-/* ---------- lists ---------- */
 .needs { list-style: none; margin: 0; padding: 0; }
 .needs li { padding: 17px 0; border-top: 1px solid var(--line); }
 .needs li:last-child { border-bottom: 1px solid var(--line); }
@@ -217,13 +208,11 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
 .plain { margin: 0 0 1.2em; padding-left: 20px; }
 .plain li { margin-bottom: .55em; }
 
-/* ---------- closing CTA ---------- */
 .close-cta { background: var(--green-2); color: #fff; padding: 74px 0; }
 .close-cta .wrap { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
 .close-cta h2 { color: #fff; margin: 0 0 8px; font-size: clamp(1.6rem, 3vw, 2.3rem); }
 .close-cta p { margin: 0; color: #cfc9b9; }
 
-/* ---------- footer ---------- */
 .foot { background: var(--paper-2); border-top: 1px solid var(--line); padding: 64px 0 30px; font-size: .93rem; }
 .foot .cols { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
 .foot h4 {
@@ -241,21 +230,18 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
   display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
 }
 
-/* ---------- mobile donate bar ---------- */
 .mobile-give { /* retired */ display: none !important; position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
   background: var(--green); padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
   border-top: 1px solid rgba(255,255,255,.18);
 }
 .mobile-give .btn { width: 100%; background: #fbf8f2; color: var(--green); border-color: #fbf8f2; }
 
-/* ---------- legal ---------- */
 .legal { padding: 56px 0 88px; }
 .legal h1 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); }
 .legal h2 { font-size: 1.32rem; margin-top: 2em; }
 .legal p, .legal li { font-size: .97rem; }
 .updated { color: var(--ink-soft); font-size: .86rem; }
 
-/* ---------- responsive ---------- */
 @media (max-width: 1000px) {
   .foot .cols { grid-template-columns: 1fr 1fr; gap: 34px; }
   .two-col { gap: 36px; }
@@ -300,8 +286,6 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
   html { scroll-behavior: auto; }
 }
 
-
-/* ---------- page hero (interior pages) ---------- */
 .page-hero {
   position: relative; color: #fff; background: var(--green);
   min-height: 44vh; display: flex; align-items: flex-end; overflow: hidden;
@@ -320,7 +304,6 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
 .crumbs a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.35); }
 .standfirst { font-size: clamp(1rem, 1.4vw, 1.16rem); color: #eee8da; max-width: 58ch; margin: 0; }
 
-/* ---------- pillars ---------- */
 .pillars {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1px; background: var(--line); border: 1px solid var(--line);
@@ -329,20 +312,17 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
 .pillar h3 { margin: 0 0 10px; font-size: 1.15rem; }
 .pillar p { margin: 0; font-size: .95rem; color: var(--ink-soft); }
 
-/* ---------- gallery ---------- */
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .gallery figure { margin: 0; overflow: hidden; }
 .gallery img { width: 100%; height: 260px; object-fit: cover; }
 .gallery figcaption { font-size: .8rem; color: var(--ink-soft); padding-top: 6px; }
 
-/* ---------- fact box ---------- */
 .factbox { border: 1px solid var(--line); padding: 26px; background: #fff; }
 .factbox h3 { margin: 0 0 16px; font-size: 1.05rem; font-family: inherit; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); }
 .factbox dl { margin: 0; display: grid; gap: 16px; }
 .factbox dt { font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); }
 .factbox dd { margin: 3px 0 0; font-weight: 600; font-size: 1rem; }
 
-/* ---------- steps ---------- */
 .steps { counter-reset: s; list-style: none; margin: 0; padding: 0; }
 .steps li {
   counter-increment: s; padding: 20px 0 20px 58px; position: relative;
@@ -357,7 +337,6 @@ figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
 .steps b { display: block; margin-bottom: 2px; }
 .steps span { color: var(--ink-soft); font-size: .95rem; }
 
-/* ---------- faq ---------- */
 details.faq { border-top: 1px solid var(--line); padding: 16px 0; }
 details.faq:last-of-type { border-bottom: 1px solid var(--line); }
 details.faq summary { cursor: pointer; font-weight: 600; list-style: none; }
@@ -366,14 +345,12 @@ details.faq summary::after { content: "+"; float: right; color: var(--clay); fon
 details.faq[open] summary::after { content: "\2013"; }
 details.faq p { margin: 10px 0 0; color: var(--ink-soft); }
 
-/* ---------- ways to give table ---------- */
 .table-wrap { overflow-x: auto; }
 .give-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
 .give-table th, .give-table td { text-align: left; padding: 15px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .give-table th { font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); font-weight: 600; }
 .give-table td b { display: block; }
 
-/* ---------- document list ---------- */
 .doclist { list-style: none; margin: 0; padding: 0; }
 .doclist li { padding: 16px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
 .doclist li:last-child { border-bottom: 1px solid var(--line); }
@@ -381,12 +358,10 @@ details.faq p { margin: 10px 0 0; color: var(--ink-soft); }
 .doclist a:hover { color: var(--clay); text-decoration: underline; }
 .doclist span { color: var(--ink-soft); font-size: .9rem; }
 
-/* ---------- split rows ---------- */
 .split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 52px; align-items: center; }
 .split.rev > *:first-child { order: 2; }
 .figure-tall img { width: 100%; height: 430px; object-fit: cover; }
 
-/* ---------- legal extras ---------- */
 .legal-summary { background: var(--paper-2); border-left: 3px solid var(--green); padding: 20px 24px; margin: 0 0 32px; }
 .legal-summary p { margin: 0; font-size: .95rem; }
 .related { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .92rem; }
@@ -408,7 +383,6 @@ details.faq p { margin: 10px 0 0; color: var(--ink-soft); }
   .gallery img { height: 230px; }
 }
 
-/* ---------- video poster ---------- */
 .video-poster { position: relative; display: block; overflow: hidden; }
 .video-poster img { width: 100%; height: auto; }
 .video-poster::after {
@@ -424,8 +398,6 @@ details.faq p { margin: 10px 0 0; color: var(--ink-soft); }
 .video-poster:hover .video-play { background: var(--green-2); }
 .video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
 
-
-/* ============ single background, no alternating tints ============ */
 :root {
   --paper: #faf9f5;
   --paper-2: #faf9f5;
@@ -446,7 +418,6 @@ main a:not(.btn):hover { text-decoration: underline; }
 .foot a, .crumbs a, .doclist a { text-decoration: none; font-weight: 600; }
 .foot a:hover, .doclist a:hover { text-decoration: underline; }
 
-/* ============ video: youtube-style play badge ============ */
 .video-play {
   display: inline-flex; align-items: center; justify-content: center;
   width: 74px; height: 52px; padding: 0; border: 0;
@@ -472,7 +443,6 @@ main a:not(.btn):hover { text-decoration: underline; }
 }
 .video-fallback[hidden] { display: none; }
 
-/* ============ mobile nav: full slide panel ============ */
 @media (max-width: 860px) {
   .site-head { position: sticky; }
   .nav {
@@ -490,7 +460,6 @@ main a:not(.btn):hover { text-decoration: underline; }
   .bar { position: relative; z-index: 61; }
   .nav-toggle { position: relative; z-index: 62; }
 
-/* ============ footer: one continuous column on phones ============ */
   .foot .cols { grid-template-columns: 1fr; gap: 0; }
   .foot .cols > div { padding: 22px 0; border-top: 1px solid var(--line); }
   .foot .cols > div:first-child { border-top: 0; padding-top: 0; }
@@ -523,8 +492,6 @@ main a:not(.btn):hover { text-decoration: underline; }
   font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; padding: 0;
 }
 
-
-/* ============ intro paragraph under the hero ============ */
 .intro { border-top: 0; }
 .intro-line {
   font-family: Georgia, serif; font-size: clamp(1.18rem, 1.9vw, 1.5rem);
@@ -532,7 +499,6 @@ main a:not(.btn):hover { text-decoration: underline; }
 }
 .intro p { color: #3d3a30; }
 
-/* ============ read-more links ============ */
 .more { display: inline-flex; align-items: baseline; gap: 8px; }
 .more::after {
   content: "\2192"; font-weight: 400;
@@ -540,7 +506,6 @@ main a:not(.btn):hover { text-decoration: underline; }
 }
 .more:hover::after { transform: translateX(4px); }
 
-/* ============ footer: colour that belongs to the site ============ */
 .foot {
   background: var(--green); color: #e6e1d2;
   border-top: 1px solid var(--green-2);
@@ -553,11 +518,9 @@ main a:not(.btn):hover { text-decoration: underline; }
 .foot li a { display: block; padding: 4px 0; }
 .foot li a:hover { color: #fff; }
 
-/* ============ buttons respond to a press ============ */
 .btn { transition: background .16s ease, color .16s ease, border-color .16s ease, transform .12s ease; }
 .btn:active { transform: translateY(1px) scale(.995); }
 
-/* ============ mobile menu: a panel sized to its contents ============ */
 @media (max-width: 860px) {
   .site-head { position: sticky; }
   .bar { position: relative; }
@@ -612,8 +575,6 @@ main a:not(.btn):hover { text-decoration: underline; }
   .nav { right: 10px; width: calc(100vw - 20px); }
 }
 
-
-/* ============ one left edge for every block, tighter vertical rhythm ============ */
 .wrap { max-width: 1140px; padding: 0 26px; }
 
 /* the narrow column starts at the same place as everything else;
@@ -638,8 +599,6 @@ main p, main li { max-width: 70ch; }
 h2 { margin-top: 1.6em; }
 .band > .wrap > h2:first-child { margin-top: 0; }
 
-
-/* ============ the film: fill the container, keep the true 16:9 frame ============ */
 .video video {
   display: block;
   width: 100%;
@@ -653,14 +612,11 @@ h2 { margin-top: 1.6em; }
 .video figcaption { margin-top: 10px; }
 /* native controls already carry play, scrub, volume, settings and fullscreen */
 
-/* ============ text blocks fill their column instead of hugging the left ============ */
 .wrap { max-width: 1080px; }
 .narrow { max-width: 1080px; }
 main p, main li { max-width: 74ch; }
 .intro p { max-width: 74ch; }
 
-
-/* ============ photo pair: breaks up the text ============ */
 .photo-pair { display: grid; grid-template-columns: 1.45fr 1fr; gap: 16px; align-items: end; }
 .photo-pair figure { margin: 0; }
 .photo-pair img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -672,7 +628,6 @@ main p, main li { max-width: 74ch; }
   .photo-pair figure:last-child img { aspect-ratio: 4 / 3; }
 }
 
-/* ============ player with its own controls ============ */
 .player { position: relative; background: #000; overflow: hidden; }
 .player video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
 .player.filling video { object-fit: cover; }
@@ -719,8 +674,6 @@ main p, main li { max-width: 74ch; }
 .player:fullscreen, .player:-webkit-full-screen { width: 100%; height: 100%; display: flex; align-items: center; }
 .player:fullscreen video, .player:-webkit-full-screen video { width: 100%; height: 100%; aspect-ratio: auto; }
 
-
-/* player states */
 .pl-spin {
   position: absolute; left: 50%; top: 50%; width: 42px; height: 42px;
   margin: -21px 0 0 -21px; z-index: 4; pointer-events: none; display: none;
@@ -748,7 +701,6 @@ main p, main li { max-width: 74ch; }
 .player:fullscreen.filling video, .player:-webkit-full-screen.filling video { object-fit: cover; }
 .player::backdrop { background: #000; }
 
-
 /* small screens: the wordmark gives way to the menu */
 @media (max-width: 640px) {
   .bar { gap: 12px; min-height: 62px; }
@@ -762,7 +714,6 @@ main p, main li { max-width: 74ch; }
   .brand b { font-size: .8rem; }
   .brand { max-width: 48%; }
 }
-
 
 /* theatre: our own full-screen stage, so it works without the Fullscreen API */
 .player.theatre {
@@ -786,7 +737,6 @@ html.theatre-open, html.theatre-open body { overflow: hidden; }
   .pl-seek { height: 6px; }
   .pl-seek::-webkit-slider-thumb { width: 18px; height: 18px; }
 }
-
 
 /* header: wordmark compact, both lines kept, gap left in the middle */
 .brand { flex: 0 1 auto; margin-right: auto; }
@@ -813,7 +763,6 @@ html.theatre-open, html.theatre-open body { overflow: hidden; }
 .player.ui-hidden .pl-bar { opacity: 0; pointer-events: none; }
 .player.ui-hidden .pl-big { display: none; }
 
-
 /* controls: play and time on the left, the rest grouped on the right */
 .pl-time { margin-right: auto; }
 .pl-seek { background: rgba(255,255,255,.42); }
@@ -824,8 +773,6 @@ html.theatre-open, html.theatre-open body { overflow: hidden; }
   .pl-mute { margin-left: auto; }
 }
 
-
-/* ============ player, built the way the real one behaves ============ */
 .player { position: relative; background: #000; overflow: hidden; }
 .player video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
 
@@ -921,7 +868,6 @@ html.theatre-open, html.theatre-open body { overflow: hidden; }
   .pl-mute { margin-left: auto; }
 }
 
-
 /* phones: pull the wordmark closer to the edge, less breathing room */
 @media (max-width: 640px) {
   .site-head .wrap.bar { padding-left: 12px; padding-right: 12px; }
@@ -931,8 +877,6 @@ html.theatre-open, html.theatre-open body { overflow: hidden; }
   .site-head .wrap.bar { padding-left: 10px; padding-right: 10px; }
 }
 
-
-/* contact: the message laid out before sending */
 .contact-review {
   margin-top: 26px; padding: 22px; border: 1px solid var(--line); background: #fff;
 }
