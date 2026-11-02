@@ -930,3 +930,19 @@ html.theatre-open, html.theatre-open body { overflow: hidden; }
 @media (max-width: 380px) {
   .site-head .wrap.bar { padding-left: 10px; padding-right: 10px; }
 }
+
+
+/* contact: the message laid out before sending */
+.contact-review {
+  margin-top: 26px; padding: 22px; border: 1px solid var(--line); background: #fff;
+}
+.contact-review[hidden] { display: none; }
+.contact-review h3 {
+  margin: 0 0 14px; font-family: inherit; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .09em; color: var(--ink-soft);
+}
+.contact-review dl { margin: 0 0 18px; display: grid; gap: 12px; }
+.contact-review dt { font-size: .76rem; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-soft); }
+.contact-review dd { margin: 3px 0 0; white-space: pre-wrap; }
+.review-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.review-actions .btn { padding: 12px 20px; font-size: .95rem; }

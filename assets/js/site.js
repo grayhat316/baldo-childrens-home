@@ -373,3 +373,38 @@ if (donateForm) {
     paint();
   });
 })();
+
+// contact form: lay the message out, then send it by WhatsApp or email
+var cForm = document.querySelector("#contact-form");
+if (cForm) {
+  var review = document.querySelector("#contact-review");
+
+  cForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.querySelector("#c-name").value.trim();
+    var email = document.querySelector("#c-email").value.trim();
+    var subject = document.querySelector("#c-subject").value;
+    var message = document.querySelector("#c-message").value.trim();
+
+    document.querySelector("#rv-name").textContent = name;
+    document.querySelector("#rv-email").textContent = email;
+    document.querySelector("#rv-subject").textContent = subject;
+    document.querySelector("#rv-message").textContent = message;
+
+    var text = subject + "\n\n" + message + "\n\n" + name + "\n" + email;
+    document.querySelector("#rv-whatsapp").href =
+      "https://wa.me/254710238132?text=" + encodeURIComponent(text);
+    document.querySelector("#rv-email").href =
+      "mailto:baldochildrenshome@gmail.com?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(message + "\n\n" + name + "\n" + email);
+
+    review.hidden = false;
+    review.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  var edit = document.querySelector("#rv-edit");
+  if (edit) edit.addEventListener("click", function () {
+    review.hidden = true;
+    document.querySelector("#c-name").focus();
+  });
+}
