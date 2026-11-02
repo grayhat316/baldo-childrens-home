@@ -301,29 +301,29 @@ document.querySelectorAll(".player").forEach(function (player) {
 
   if (closeBtn) closeBtn.addEventListener("click", closeStage);
 
-  var dragging = false;
-  function seekFromEvent(e) {
-    var box = prog.getBoundingClientRect();
-    var ratio = Math.min(Math.max((e.clientX - box.left) / box.width, 0), 1);
-    if (v.duration) v.currentTime = ratio * v.duration;
-    paint();
-  }
-  if (prog) {
-    prog.addEventListener("pointerdown", function (e) {
-      dragging = true;
-      prog.setPointerCapture(e.pointerId);
-      seekFromEvent(e);
-    });
-    prog.addEventListener("pointermove", function (e) { if (dragging) seekFromEvent(e); });
-    prog.addEventListener("pointerup", function (e) {
-      dragging = false;
-      try { prog.releasePointerCapture(e.pointerId); } catch (err) {}
-    });
-    prog.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowRight") { e.preventDefault(); seekBy(5); }
-      if (e.key === "ArrowLeft") { e.preventDefault(); seekBy(-5); }
-    });
-  }
+    var dragging = false;
+    function seekFromEvent(e) {
+        var box = prog.getBoundingClientRect();
+        var ratio = Math.min(Math.max((e.clientX - box.left) / box.width, 0), 1);
+        if (v.duration) v.currentTime = ratio * v.duration;
+        paint();
+    }
+    if (prog) {
+        prog.addEventListener("pointerdown", function (e) {
+            dragging = true;
+            seekFromEvent(e);
+            try { prog.setPointerCapture(e.pointerId); } catch (err) {}
+        });
+        prog.addEventListener("pointermove", function (e) { if (dragging) seekFromEvent(e); });
+        prog.addEventListener("pointerup", function (e) {
+            dragging = false;
+            try { prog.releasePointerCapture(e.pointerId); } catch (err) {}
+        });
+        prog.addEventListener("keydown", function (e) {
+            if (e.key === "ArrowRight") { e.preventDefault(); seekBy(5); }
+            if (e.key === "ArrowLeft") { e.preventDefault(); seekBy(-5); }
+        });
+    }
 
   ["play", "pause", "ended", "timeupdate", "loadedmetadata", "volumechange", "canplay", "error"]
     .forEach(function (ev) { v.addEventListener(ev, paint); });
@@ -362,3 +362,38 @@ document.querySelectorAll(".player").forEach(function (player) {
 
   paint();
 });
+
+var cForm = document.querySelector("#contact-form");
+if (cForm) {
+  var review = document.querySelector("#contact-review");
+
+  cForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.querySelector("#c-name").value.trim();
+    var email = document.querySelector("#c-email").value.trim();
+    var subject = document.querySelector("#c-subject").value;
+    var message = document.querySelector("#c-message").value.trim();
+
+    document.querySelector("#rv-name").textContent = name;
+    document.querySelector("#rv-email").textContent = email;
+    document.querySelector("#rv-subject").textContent = subject;
+    document.querySelector("#rv-message").textContent = message;
+
+    // nothing is posted anywhere; the message is handed to whatsapp or their mail app
+    var text = subject + "\n\n" + message + "\n\n" + name + "\n" + email;
+    document.querySelector("#rv-whatsapp").href =
+      "https://wa.me/254710238132?text=" + encodeURIComponent(text);
+    document.querySelector("#rv-email").href =
+      "mailto:baldochildrenshome@gmail.com?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(message + "\n\n" + name + "\n" + email);
+
+    review.hidden = false;
+    review.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  var edit = document.querySelector("#rv-edit");
+  if (edit) edit.addEventListener("click", function () {
+    review.hidden = true;
+    document.querySelector("#c-name").focus();
+  });
+}
