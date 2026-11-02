@@ -12,7 +12,7 @@
 <meta property="og:description" content="A home in Ndaragwa, Nyandarua County for children with nowhere else to go. Run by the Little Daughters of St. Joseph since 2000. Donate by card or M-Pesa.">
 <meta property="og:image" content="assets/img/compound.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/css/site.css?v=11">
+<link rel="stylesheet" href="assets/css/site.css?v=12">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -152,15 +152,23 @@
         <div class="player paused">
           <video src="assets/video/film-web.mp4" poster="assets/img/video-poster.jpg" playsinline preload="metadata" aria-label="Film about the home, recorded in 2015"></video>
           <div class="pl-spin" aria-hidden="true"></div>
+          <div class="pl-flash" aria-hidden="true"></div>
           <button class="pl-big" type="button" aria-label="Play the film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
-          <p class="pl-error" hidden>The film could not play here. <a href="https://www.youtube.com/watch?v=dGLNG-MSjO8" target="_blank" rel="noopener">Watch it on YouTube</a>.</p>
+          <button class="pl-x" type="button" aria-label="Close the video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z"/></svg></button>
           <div class="pl-bar">
-            <button class="pl-play" type="button" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
-            <input class="pl-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek through the film">
-            <span class="pl-time">0:00 / 0:00</span>
-            <button class="pl-mute" type="button" aria-label="Mute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg></button>
-            <button class="pl-fill" type="button" aria-label="Fill the screen with the video" title="Fill the screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l7-7-1.4-1.4L4 17.2V20h0zM20 4l-7 7 1.4 1.4L20 6.8V4zM4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm14 0h2v6h-6v-2h4v-4z"/></svg></button>
-            <button class="pl-fs" type="button" aria-label="Full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5zm2 2v10h14V7H5z"/></svg></button>
+            <div class="pl-progress" role="slider" tabindex="0" aria-label="Seek through the film" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00">
+              <div class="pl-track"></div>
+              <div class="pl-played"></div>
+              <div class="pl-knob"></div>
+            </div>
+            <div class="pl-row">
+              <button class="pl-play" type="button" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+              <span class="pl-time">0:00 / 0:00</span>
+              <span class="pl-spacer"></span>
+              <button class="pl-mute" type="button" aria-label="Mute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg></button>
+              <button class="pl-fs" type="button" aria-label="Full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5zm2 2v10h14V7H5z"/></svg></button>
+              <button class="pl-fill" type="button" aria-label="Fill the screen in landscape" title="Fill the screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l7-7-1.4-1.4L4 17.2V20zM20 4l-7 7 1.4 1.4L20 6.8V4zM4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm14 0h2v6h-6v-2h4v-4z"/></svg></button>
+            </div>
           </div>
         </div>
         <figcaption>Filmed in 2015 for the Rotary Casa Maria project, on a visit by the Italian donors who paid for the dormitories.</figcaption>
@@ -319,6 +327,6 @@
 </footer>
 
 
-<script src="assets/js/site.js?v=11"></script>
+<script src="assets/js/site.js?v=12"></script>
 </body>
 </html>

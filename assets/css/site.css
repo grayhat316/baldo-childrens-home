@@ -823,3 +823,110 @@ html.theatre-open, html.theatre-open body { overflow: hidden; }
   .pl-time { margin-right: 0; }
   .pl-mute { margin-left: auto; }
 }
+
+
+/* ============ player, built the way the real one behaves ============ */
+.player { position: relative; background: #000; overflow: hidden; }
+.player video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
+
+/* progress: a drawn bar, so the knob sits exactly where the playhead is */
+.pl-progress { position: relative; height: 16px; cursor: pointer; margin-bottom: 2px; }
+.pl-track, .pl-played { position: absolute; top: 6px; height: 4px; border-radius: 2px; }
+.pl-track { left: 0; right: 0; background: rgba(255,255,255,.38); }
+.pl-played { left: 0; width: 0; background: #ff0000; }
+.pl-knob {
+  position: absolute; top: 3px; left: 0; width: 10px; height: 10px; margin-left: -5px;
+  border-radius: 50%; background: #ff0000; transform: scale(0); transition: transform .12s ease;
+}
+.player:hover .pl-knob, .player.paused .pl-knob, .player.theatre .pl-knob { transform: scale(1); }
+
+.pl-bar {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  padding: 8px 14px 10px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.68) 40%, rgba(0,0,0,.86) 100%);
+  opacity: 0; transition: opacity .18s ease;
+}
+.player:hover .pl-bar, .player:focus-within .pl-bar, .player.paused .pl-bar,
+.player.ui-hidden-off .pl-bar { opacity: 1; }
+.player.ui-hidden .pl-bar { opacity: 0; pointer-events: none; }
+@media (hover: none) { .pl-bar { opacity: 1; } .player.ui-hidden .pl-bar { opacity: 0; } }
+
+.pl-row { display: flex; align-items: center; gap: 10px; }
+.pl-spacer { flex: 1 1 auto; }
+.pl-row button { background: none; border: 0; padding: 8px; cursor: pointer; line-height: 0; }
+.pl-row button svg { width: 22px; height: 22px; fill: #fff; }
+.pl-row button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.pl-time { color: #fff; font-size: .82rem; font-variant-numeric: tabular-nums; }
+
+.pl-big {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 74px; height: 52px; border: 0; border-radius: 12px; cursor: pointer;
+  background: rgba(255,0,0,.92); display: flex; align-items: center; justify-content: center; z-index: 2;
+}
+.pl-big svg { width: 24px; height: 24px; fill: #fff; margin-left: 3px; }
+.player.playing .pl-big, .player.ui-hidden .pl-big { display: none; }
+
+.pl-spin {
+  position: absolute; left: 50%; top: 50%; width: 42px; height: 42px; margin: -21px 0 0 -21px;
+  z-index: 4; pointer-events: none; display: none;
+  border: 3px solid rgba(255,255,255,.28); border-top-color: #fff; border-radius: 50%;
+  animation: plspin .9s linear infinite;
+}
+.player.buffering .pl-spin { display: block; }
+@keyframes plspin { to { transform: rotate(360deg); } }
+
+.pl-flash {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+  color: #fff; font-size: .95rem; background: rgba(0,0,0,.6);
+  padding: 10px 16px; border-radius: 20px; opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+.pl-flash.show { opacity: 1; }
+.pl-flash.left { left: 12%; }
+.pl-flash.right { right: 12%; }
+
+.pl-x {
+  position: absolute; top: 10px; right: 10px; z-index: 6; display: none;
+  background: rgba(0,0,0,.55); border: 0; border-radius: 50%; width: 40px; height: 40px;
+  cursor: pointer; align-items: center; justify-content: center;
+}
+.pl-x svg { width: 20px; height: 20px; fill: #fff; }
+.player.theatre .pl-x { display: flex; }
+
+.pl-error {
+  position: absolute; left: 12px; right: 12px; bottom: 92px; z-index: 5; margin: 0;
+  padding: 10px 12px; background: rgba(0,0,0,.85); color: #fff; font-size: .9rem;
+}
+.pl-error[hidden] { display: none; }
+.pl-error a { color: #fff; text-decoration: underline; }
+
+/* the big screen: black stage, whole frame, controls on top */
+.player.theatre {
+  position: fixed; inset: 0; z-index: 9999; width: 100vw; height: 100vh;
+  display: flex; align-items: center; justify-content: center; background: #000;
+}
+.player.theatre video { width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
+.player.theatre.filling video { object-fit: cover; }
+html.theatre-open, html.theatre-open body { overflow: hidden; }
+
+/* phones: scrub line on its own row so nothing is pushed off */
+@media (max-width: 620px) {
+  .pl-bar { padding: 10px 12px 12px; }
+  .pl-row { gap: 6px; }
+  .pl-row button { padding: 8px; min-width: 38px; min-height: 38px; }
+  .pl-row button svg { width: 21px; height: 21px; }
+  .pl-time { font-size: .76rem; }
+  .pl-progress { height: 18px; }
+  .pl-spacer { display: none; }
+  .pl-mute { margin-left: auto; }
+}
+
+
+/* phones: pull the wordmark closer to the edge, less breathing room */
+@media (max-width: 640px) {
+  .site-head .wrap.bar { padding-left: 12px; padding-right: 12px; }
+  .brand { margin-left: 0; }
+}
+@media (max-width: 380px) {
+  .site-head .wrap.bar { padding-left: 10px; padding-right: 10px; }
+}

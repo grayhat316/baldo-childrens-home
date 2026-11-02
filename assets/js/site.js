@@ -134,21 +134,20 @@ if (donateForm) {
 
 // ---------- the film player ----------
 (function () {
-  var ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  var ICON_PLAY  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
   var ICON_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>';
-  var ICON_VOL = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>';
-  var ICON_MUTE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm12.7.1 1.4 1.4-2 2 2 2-1.4 1.4-2-2-2 2-1.4-1.4 2-2-2-2 1.4-1.4 2 2 2-2z"/></svg>';
-
+  var ICON_VOL   = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>';
+  var ICON_MUTE  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm12.7.1 1.4 1.4-2 2 2 2-1.4 1.4-2-2-2 2-1.4-1.4 2-2-2-2 1.4-1.4 2 2 2-2z"/></svg>';
   var ICON_ENTER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5zm2 2v10h14V7H5z"/></svg>';
-  var ICON_EXIT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h2v6H5V7h4V3zm4 0h2v4h4v2h-6V3zM5 15h6v6H9v-4H5v-2zm10 0h4v2h-4v4h-2v-6z"/></svg>';
+  var ICON_EXIT  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h2v6H5V7h4V3zm4 0h2v4h4v2h-6V3zM5 15h6v6H9v-4H5v-2zm10 0h4v2h-4v4h-2v-6z"/></svg>';
 
   function clock(t) {
     if (!isFinite(t) || t < 0) return "0:00";
-    var m = Math.floor(t / 60), s = Math.floor(t % 60);
-    return m + ":" + (s < 10 ? "0" + s : s);
+    var m = Math.floor(t / 60), sec = Math.floor(t % 60);
+    return m + ":" + (sec < 10 ? "0" + sec : sec);
   }
 
-  function isFs() {
+  function fullscreenEl() {
     return document.fullscreenElement || document.webkitFullscreenElement || null;
   }
 
@@ -156,77 +155,185 @@ if (donateForm) {
     var v = player.querySelector("video");
     if (!v) return;
     var big = player.querySelector(".pl-big");
-    var play = player.querySelector(".pl-play");
-    var seek = player.querySelector(".pl-seek");
-    var time = player.querySelector(".pl-time");
-    var mute = player.querySelector(".pl-mute");
-    var fill = player.querySelector(".pl-fill");
-    var fs = player.querySelector(".pl-fs");
+    var playBtn = player.querySelector(".pl-play");
+    var timeEl = player.querySelector(".pl-time");
+    var muteBtn = player.querySelector(".pl-mute");
+    var fsBtn = player.querySelector(".pl-fs");
+    var fillBtn = player.querySelector(".pl-fill");
+    var closeBtn = player.querySelector(".pl-x");
+    var prog = player.querySelector(".pl-progress");
+    var played = player.querySelector(".pl-played");
+    var knob = player.querySelector(".pl-knob");
+    var flashL = player.querySelector(".pl-flash");
     var note = player.querySelector(".pl-error");
-    var stuck = false, stuckTimer = null;
+    var stuck = false, stuckTimer = null, hideTimer = null;
+
+    function bigOpen() { return player.classList.contains("theatre") || !!fullscreenEl(); }
+
+    function showControls() {
+      player.classList.remove("ui-hidden");
+      clearTimeout(hideTimer);
+      if (!v.paused) {
+        hideTimer = setTimeout(function () {
+          if (!v.paused && bigOpen()) player.classList.add("ui-hidden");
+        }, 3000);
+      }
+    }
 
     function paint() {
-      var playing = !v.paused && !v.ended && v.readyState > 2;
+      var playing = !v.paused && !v.ended;
       player.classList.toggle("playing", playing);
       player.classList.toggle("paused", !playing);
-      if (play) {
-        play.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
-        play.setAttribute("aria-label", playing ? "Pause" : "Play");
+      if (playBtn) { playBtn.innerHTML = playing ? ICON_PAUSE : ICON_PLAY; playBtn.setAttribute("aria-label", playing ? "Pause" : "Play"); }
+      if (muteBtn) {
+        muteBtn.innerHTML = (v.muted || v.volume === 0) ? ICON_MUTE : ICON_VOL;
+        muteBtn.setAttribute("aria-label", v.muted ? "Unmute" : "Mute");
       }
-      if (mute) {
-        mute.innerHTML = (v.muted || v.volume === 0) ? ICON_MUTE : ICON_VOL;
-        mute.setAttribute("aria-label", v.muted ? "Unmute" : "Mute");
+      if (timeEl) timeEl.textContent = clock(v.currentTime) + " / " + clock(v.duration);
+
+      var pct = v.duration ? (v.currentTime / v.duration) * 100 : 0;
+      if (played) played.style.width = pct + "%";
+      if (knob) knob.style.left = pct + "%";
+      if (prog) {
+        prog.setAttribute("aria-valuenow", Math.round(pct));
+        prog.setAttribute("aria-valuetext", clock(v.currentTime));
       }
-      if (time) time.textContent = clock(v.currentTime) + " / " + clock(v.duration);
-      if (seek && v.duration) seek.value = Math.round((v.currentTime / v.duration) * 1000);
+      if (fsBtn) {
+        var open = bigOpen();
+        fsBtn.innerHTML = open ? ICON_EXIT : ICON_ENTER;
+        fsBtn.setAttribute("aria-label", open ? "Exit full screen" : "Full screen");
+      }
+      if (fillBtn) fillBtn.classList.toggle("on", player.classList.contains("filling"));
       if (note) note.hidden = !(v.error || stuck);
-      if (fs) {
-        var big = player.classList.contains("theatre") || !!isFs();
-        fs.innerHTML = big ? ICON_EXIT : ICON_ENTER;
-        fs.setAttribute("aria-label", big ? "Exit the big screen" : "Full screen");
-      }
     }
 
     function start() {
-      var p = v.play();
-      if (p && p.catch) {
-        p.catch(function () {
-          // some phones refuse to start with sound; try silent, then let them unmute
-          v.muted = true;
-          paint();
-          var q = v.play();
-          if (q && q.catch) q.catch(function () { player.classList.remove("buffering"); });
-        });
-      }
+      var pr = v.play();
+      if (pr && pr.catch) pr.catch(function () {
+        v.muted = true; paint();
+        var again = v.play();
+        if (again && again.catch) again.catch(function () { player.classList.remove("buffering"); });
+      });
+      showControls();
     }
 
-    function toggle() {
-      if (v.paused || v.ended) start(); else v.pause();
+    function toggle() { if (v.paused || v.ended) start(); else { v.pause(); showControls(); } }
+
+    function seekBy(sec) {
+      if (!v.duration) return;
+      v.currentTime = Math.min(Math.max(0, v.currentTime + sec), v.duration - 0.2);
+      paint();
     }
 
-    if (big) big.addEventListener("click", toggle);
-    if (play) play.addEventListener("click", toggle);
+    function flash(side, text) {
+      if (!flashL) return;
+      flashL.className = "pl-flash " + side + " show";
+      flashL.textContent = text;
+      setTimeout(function () { flashL.classList.remove("show"); }, 700);
+    }
 
-    v.addEventListener("click", function () {
-      var onStage = player.classList.contains("theatre") || !!isFs();
-      if (!onStage) { toggle(); return; }
-      var hidden = player.classList.toggle("ui-hidden");
-      clearTimeout(player._uiTimer);
-      if (!hidden) {
-        player._uiTimer = setTimeout(function () {
-          if (!v.paused) player.classList.add("ui-hidden");
-        }, 3000);
-      }
-    });
+    function lockLandscape() {
+      try {
+        if (screen.orientation && screen.orientation.lock) {
+          var r = screen.orientation.lock("landscape");
+          if (r && r.catch) r.catch(function () {});
+        } else if (screen.lockOrientation) {
+          screen.lockOrientation("landscape");
+        }
+      } catch (e) {}
+    }
 
-    player.addEventListener("mousemove", function () {
-      if (!player.classList.contains("theatre")) return;
+    function unlockRotation() {
+      try {
+        if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+      } catch (e) {}
+    }
+
+    function openStage(filled) {
+      player.classList.add("theatre");
+      player.classList.toggle("filling", !!filled);
+      document.documentElement.classList.add("theatre-open");
       player.classList.remove("ui-hidden");
-      clearTimeout(player._uiTimer);
-      player._uiTimer = setTimeout(function () {
-        if (!v.paused) player.classList.add("ui-hidden");
-      }, 3000);
+      if (player.requestFullscreen) {
+        var r = player.requestFullscreen();
+        if (r && r.catch) r.catch(function () {});
+      }
+      showControls();
+      paint();
+    }
+
+    function closeStage() {
+      try { if (fullscreenEl() && document.exitFullscreen) document.exitFullscreen(); } catch (e) {}
+      player.classList.remove("theatre");
+      player.classList.remove("filling");
+      player.classList.remove("ui-hidden");
+      document.documentElement.classList.remove("theatre-open");
+      unlockRotation();
+      paint();
+    }
+
+    // taps: single toggles playback, double on a side jumps ten seconds
+    var lastTap = 0, tapTimer = null;
+    v.addEventListener("click", function (e) {
+      var now = Date.now();
+      var box = v.getBoundingClientRect();
+      var where = (e.clientX - box.left) / box.width;
+
+      if (now - lastTap < 320) {
+        clearTimeout(tapTimer);
+        lastTap = 0;
+        if (where < 0.35) { seekBy(-10); flash("left", "-10 seconds"); }
+        else if (where > 0.65) { seekBy(10); flash("right", "+10 seconds"); }
+        return;
+      }
+      lastTap = now;
+      tapTimer = setTimeout(function () { toggle(); showControls(); }, 240);
     });
+
+    if (big) big.addEventListener("click", function (e) { e.stopPropagation(); start(); });
+    if (playBtn) playBtn.addEventListener("click", function (e) { e.stopPropagation(); toggle(); });
+    if (muteBtn) muteBtn.addEventListener("click", function () { v.muted = !v.muted; });
+
+    if (fsBtn) fsBtn.addEventListener("click", function () {
+      if (bigOpen()) closeStage();
+      else { openStage(false); }
+    });
+
+    if (fillBtn) fillBtn.addEventListener("click", function () {
+      if (!bigOpen()) { openStage(true); lockLandscape(); }
+      else {
+        var on = player.classList.toggle("filling");
+        if (on) lockLandscape();
+      }
+      paint();
+    });
+
+    if (closeBtn) closeBtn.addEventListener("click", closeStage);
+
+    // dragging the progress bar
+    var dragging = false;
+    function seekFromEvent(e) {
+      var box = prog.getBoundingClientRect();
+      var ratio = Math.min(Math.max((e.clientX - box.left) / box.width, 0), 1);
+      if (v.duration) v.currentTime = ratio * v.duration;
+      paint();
+    }
+    if (prog) {
+      prog.addEventListener("pointerdown", function (e) {
+        dragging = true;
+        prog.setPointerCapture(e.pointerId);
+        seekFromEvent(e);
+      });
+      prog.addEventListener("pointermove", function (e) { if (dragging) seekFromEvent(e); });
+      prog.addEventListener("pointerup", function (e) {
+        dragging = false;
+        try { prog.releasePointerCapture(e.pointerId); } catch (err) {}
+      });
+      prog.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight") { e.preventDefault(); seekBy(5); }
+        if (e.key === "ArrowLeft") { e.preventDefault(); seekBy(-5); }
+      });
+    }
 
     ["play", "pause", "ended", "timeupdate", "loadedmetadata", "volumechange", "canplay", "error"]
       .forEach(function (ev) { v.addEventListener(ev, paint); });
@@ -244,69 +351,23 @@ if (donateForm) {
       stuck = false;
       paint();
     }
-
     v.addEventListener("waiting", beginBuffer);
     v.addEventListener("stalled", beginBuffer);
     v.addEventListener("seeking", beginBuffer);
-    ["playing", "canplay", "seeked", "pause", "ended"].forEach(function (ev) {
-      v.addEventListener(ev, endBuffer);
-    });
+    ["playing", "canplay", "seeked", "pause", "ended"].forEach(function (ev) { v.addEventListener(ev, endBuffer); });
 
-    if (seek) seek.addEventListener("input", function () {
-      if (v.duration) v.currentTime = (seek.value / 1000) * v.duration;
-    });
-
-    if (mute) mute.addEventListener("click", function () { v.muted = !v.muted; });
-
-    function openBig() {
-      player.classList.add("theatre");
-      player.classList.remove("ui-hidden");
-      document.documentElement.classList.add("theatre-open");
-      // ask the browser for real fullscreen too, but never depend on it
-      if (player.requestFullscreen) {
-        var r = player.requestFullscreen();
-        if (r && r.catch) r.catch(function () {});
-      }
-    }
-
-    function closeBig() {
-      player.classList.remove("theatre");
-      player.classList.remove("filling");
-      player.classList.remove("ui-hidden");
-      document.documentElement.classList.remove("theatre-open");
-      if (fill) fill.classList.remove("on");
-      if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
-    }
-
-    function bigOpen() {
-      return player.classList.contains("theatre") || !!isFs();
-    }
-
-    if (fill) fill.addEventListener("click", function () {
-      if (!bigOpen()) {
-        player.classList.add("filling");
-        if (fill) fill.classList.add("on");
-        openBig();
-      } else {
-        var on = player.classList.toggle("filling");
-        if (fill) fill.classList.toggle("on", on);
-      }
-    });
-
-    if (fs) fs.addEventListener("click", function () {
-      if (bigOpen()) closeBig(); else openBig();
-    });
-
+    document.addEventListener("fullscreenchange", paint);
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && bigOpen()) closeBig();
+      if (e.key === "Escape" && bigOpen()) closeStage();
     });
 
     player.addEventListener("keydown", function (e) {
       if (e.target.tagName === "INPUT") return;
       if (e.key === " " || e.key === "k") { e.preventDefault(); toggle(); }
       if (e.key === "m") { e.preventDefault(); v.muted = !v.muted; }
-      if (e.key === "f") { e.preventDefault(); if (fs) fs.click(); }
-      if (e.key === "Escape") { if (bigOpen()) closeBig(); }
+      if (e.key === "f") { e.preventDefault(); if (fsBtn) fsBtn.click(); }
+      if (e.key === "ArrowRight") { e.preventDefault(); seekBy(10); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); seekBy(-10); }
     });
 
     paint();
